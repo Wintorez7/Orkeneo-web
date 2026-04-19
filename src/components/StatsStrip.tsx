@@ -1,5 +1,12 @@
 "use client";
 
+import { motion } from "framer-motion";
+
+import { fadeUp, fadeRight } from "@/lib/animations/variants";
+import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
+import MotionWrapper from "./motion/MotionWrapper";
+import MotionStagger from "./motion/MotionStagger";
+
 export default function StatsStrip() {
   const stats = [
     {
@@ -25,35 +32,52 @@ export default function StatsStrip() {
   return (
     <section className="w-full py-20 bg-linear-to-b bg-[#f5f6ff]">
       <div className="max-w-6xl mx-auto px-6 text-center">
-
         {/* STATS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 items-center">
+        <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 items-center">
           {stats.map((stat, i) => (
-            <div key={i} className="flex flex-col items-center">
-              
-              {/* VALUE */}
-              <h3 className={`text-5xl md:text-6xl font-bold ${stat.color}`}>
-                {stat.value}
-              </h3>
+            <MotionWrapper key={i} variants={fadeUp}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                className="flex flex-col items-center group"
+              >
+                {/* VALUE */}
+                <motion.h3
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className={`text-5xl md:text-6xl font-bold ${stat.color}`}
+                >
+                  {stat.value}
+                </motion.h3>
 
-              {/* LABEL */}
-              <p className="mt-3 text-[11px] tracking-[0.2em] uppercase text-gray-400 font-semibold">
-                {stat.label}
-              </p>
+                {/* LABEL */}
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="mt-3 text-[11px] tracking-[0.2em] uppercase text-gray-400 font-semibold group-hover:text-gray-500 transition"
+                >
+                  {stat.label}
+                </motion.p>
 
-              {/* UNDERLINE */}
-              <div
-                className={`mt-3 h-0.75 w-12 rounded-full ${stat.underline}`}
-              />
-            </div>
+                {/* UNDERLINE (animated grow) */}
+                <motion.div
+                  initial={{ width: 0, opacity: 0 }}
+                  whileInView={{ width: "3rem", opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className={`mt-3 h-0.75 rounded-full ${stat.underline}`}
+                />
+              </motion.div>
+            </MotionWrapper>
           ))}
-        </div>
+        </MotionStagger>
 
         {/* FOOTNOTE */}
-        <p className="mt-16 text-[10px] tracking-[0.25em] uppercase text-gray-400 font-semibold">
-          Based on customer results across 240+ optimized outlets
-        </p>
-
+        <MotionWrapper variants={fadeUp} delay={0.2}>
+          <p className="mt-16 text-[10px] tracking-[0.25em] uppercase text-gray-400 font-semibold">
+            Based on customer results across 240+ optimized outlets
+          </p>
+        </MotionWrapper>
       </div>
     </section>
   );

@@ -1,10 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import { Mail, ChevronLeft, ChevronRight, BarChart3, TrendingUp, UtensilsCrossed, Calendar, Plus, Minus, Leaf, Clock } from "lucide-react";
+import {
+  Mail,
+  ChevronLeft,
+  ChevronRight,
+  BarChart3,
+  TrendingUp,
+  UtensilsCrossed,
+  Calendar,
+  Plus,
+  Minus,
+  Leaf,
+  Clock,
+} from "lucide-react";
 import { Button } from "../reusable/button";
 import Badge from "../reusable/badge";
 import { TextSection } from "../reusable/text-section";
-import { Chart as ChartJSComponent } from 'react-chartjs-2';
+import { Chart as ChartJSComponent } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,13 +28,23 @@ import {
   LineController,
   Legend,
   Tooltip as ChartJsTooltip,
-} from 'chart.js';
+} from "chart.js";
 import ShadowCircle from "../reusable/shadow-circle";
 // import { useRouter } from "next/navigation";
-import type { TooltipItem } from 'chart.js';
+import type { TooltipItem } from "chart.js";
 import { BookDemoModal } from "./book-demo-modal";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, BarController, PointElement, LineElement, LineController, Legend, ChartJsTooltip);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  BarController,
+  PointElement,
+  LineElement,
+  LineController,
+  Legend,
+  ChartJsTooltip,
+);
 
 const initialFormData = {
   restaurantName: "",
@@ -54,13 +76,13 @@ type ChartDataPoint = {
 
 type ResultsPageProps = {
   formData: FormData;
-//   calculateResults: () => {
-//     annualProfit: number;
-//     roi: number;
-//     laborSavings: number;
-//     cogsSavings: number;
-//     revenueBump: number;
-//   };
+  //   calculateResults: () => {
+  //     annualProfit: number;
+  //     roi: number;
+  //     laborSavings: number;
+  //     cogsSavings: number;
+  //     revenueBump: number;
+  //   };
   generateChartData: () => ChartDataPoint[];
   onRestart: () => void;
 };
@@ -79,33 +101,64 @@ export default function RoiCalculator() {
     const newErrors: { [K in keyof FormData]?: string } = {};
 
     if (step === 1) {
-      if (!formData.restaurantName) newErrors.restaurantName = "Restaurant name is required";
-      if (!formData.restaurantLocation) newErrors.restaurantLocation = "Location is required";
+      if (!formData.restaurantName)
+        newErrors.restaurantName = "Restaurant name is required";
+      if (!formData.restaurantLocation)
+        newErrors.restaurantLocation = "Location is required";
       if (!formData.email) newErrors.email = "Email is required";
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email";
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+        newErrors.email = "Invalid email";
       if (!formData.phone) newErrors.phone = "Phone is required";
-      else if (!/^\d{10,}$/.test(formData.phone.replace(/\D/g, ""))) newErrors.phone = "Invalid phone";
+      else if (!/^\d{10,}$/.test(formData.phone.replace(/\D/g, "")))
+        newErrors.phone = "Invalid phone";
     }
     if (step === 2) {
-      if (!formData.weeklyRevenue) newErrors.weeklyRevenue = "Weekly revenue is required";
-      else if (Number(formData.weeklyRevenue) <= 0) newErrors.weeklyRevenue = "Must be positive";
-      if (!formData.locations || Number(formData.locations) < 1) newErrors.locations = "At least 1 location";
-      if (!formData.restaurantType) newErrors.restaurantType = "Type is required";
-      if (!formData.businessStructure) newErrors.businessStructure = "Structure is required";
+      if (!formData.weeklyRevenue)
+        newErrors.weeklyRevenue = "Weekly revenue is required";
+      else if (Number(formData.weeklyRevenue) <= 0)
+        newErrors.weeklyRevenue = "Must be positive";
+      if (!formData.locations || Number(formData.locations) < 1)
+        newErrors.locations = "At least 1 location";
+      if (!formData.restaurantType)
+        newErrors.restaurantType = "Type is required";
+      if (!formData.businessStructure)
+        newErrors.businessStructure = "Structure is required";
     }
     if (step === 3) {
-      if (!formData.currentCOGS) newErrors.currentCOGS = "Current COGS is required";
-      else if (Number(formData.currentCOGS) < 0 || Number(formData.currentCOGS) > 100) newErrors.currentCOGS = "Must be 0-100";
-      if (!formData.targetCOGS) newErrors.targetCOGS = "Target COGS is required";
-      else if (Number(formData.targetCOGS) < 0 || Number(formData.targetCOGS) > 100) newErrors.targetCOGS = "Must be 0-100";
-      if (!formData.currentLabor) newErrors.currentLabor = "Current labor is required";
-      else if (Number(formData.currentLabor) < 0 || Number(formData.currentLabor) > 100) newErrors.currentLabor = "Must be 0-100";
-      if (!formData.targetLabor) newErrors.targetLabor = "Target labor is required";
-      else if (Number(formData.targetLabor) < 0 || Number(formData.targetLabor) > 100) newErrors.targetLabor = "Must be 0-100";
-      if (!formData.cuisineType) newErrors.cuisineType = "Cuisine type is required";
+      if (!formData.currentCOGS)
+        newErrors.currentCOGS = "Current COGS is required";
+      else if (
+        Number(formData.currentCOGS) < 0 ||
+        Number(formData.currentCOGS) > 100
+      )
+        newErrors.currentCOGS = "Must be 0-100";
+      if (!formData.targetCOGS)
+        newErrors.targetCOGS = "Target COGS is required";
+      else if (
+        Number(formData.targetCOGS) < 0 ||
+        Number(formData.targetCOGS) > 100
+      )
+        newErrors.targetCOGS = "Must be 0-100";
+      if (!formData.currentLabor)
+        newErrors.currentLabor = "Current labor is required";
+      else if (
+        Number(formData.currentLabor) < 0 ||
+        Number(formData.currentLabor) > 100
+      )
+        newErrors.currentLabor = "Must be 0-100";
+      if (!formData.targetLabor)
+        newErrors.targetLabor = "Target labor is required";
+      else if (
+        Number(formData.targetLabor) < 0 ||
+        Number(formData.targetLabor) > 100
+      )
+        newErrors.targetLabor = "Must be 0-100";
+      if (!formData.cuisineType)
+        newErrors.cuisineType = "Cuisine type is required";
       if (!formData.posSystem) newErrors.posSystem = "POS system is required";
       if (!formData.bohSystem) newErrors.bohSystem = "BOH system is required";
-      if (!formData.improvementArea) newErrors.improvementArea = "Improvement area is required";
+      if (!formData.improvementArea)
+        newErrors.improvementArea = "Improvement area is required";
     }
 
     setErrors(newErrors);
@@ -171,8 +224,10 @@ export default function RoiCalculator() {
     const targetCOGSPercent = Number.parseFloat(formData.targetCOGS) || 27;
     const currentLaborPercent = Number.parseFloat(formData.currentLabor) || 28;
     const targetLaborPercent = Number.parseFloat(formData.targetLabor) || 25;
-    const cogsSavings = (annualRevenue * (currentCOGSPercent - targetCOGSPercent)) / 100;
-    const laborSavings = (annualRevenue * (currentLaborPercent - targetLaborPercent)) / 100;
+    const cogsSavings =
+      (annualRevenue * (currentCOGSPercent - targetCOGSPercent)) / 100;
+    const laborSavings =
+      (annualRevenue * (currentLaborPercent - targetLaborPercent)) / 100;
     const revenueBump = annualRevenue * 0.025;
     const totalSavings = cogsSavings + laborSavings + revenueBump;
     const subscriptionCost = 30000;
@@ -192,7 +247,9 @@ export default function RoiCalculator() {
     const monthlyProfit = results.annualProfit / 12;
     return Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
-      additionalProfit: Math.round(monthlyProfit * (0.8 + (i / 12) * 0.7) * 0.7),
+      additionalProfit: Math.round(
+        monthlyProfit * (0.8 + (i / 12) * 0.7) * 0.7,
+      ),
       ghgReduction: ((1.5 + (i / 12) * 2.25) * 10) / 10,
       subscriptionCost: 2500,
     }));
@@ -201,15 +258,15 @@ export default function RoiCalculator() {
   // --- UI ---
   return (
     <div className="flex flex-col items-center justify-center py-8">
-     {currentStep < 4 && (
+      {currentStep < 4 && (
         <div className="mb-8">
-            <TextSection
+          <TextSection
             subtitle="ROI Calculator"
             title="Ready to see your potential savings?"
             description="See how much our AI-powered demand planning can save your restaurant each month."
-            />
+          />
         </div>
-     )}
+      )}
       <div className="w-full max-w-3xl">
         {/* Loading state */}
         {isCalculating ? (
@@ -217,8 +274,13 @@ export default function RoiCalculator() {
             <div className="w-16 h-16 bg-[#4d77ff] rounded-full flex items-center justify-center mx-auto mb-6">
               <BarChart3 className="w-8 h-8 text-white animate-pulse" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Calculating Your ROI...</h3>
-            <p className="text-gray-600 mb-6">Our AI is analyzing your data to provide personalized savings projections</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Calculating Your ROI...
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Our AI is analyzing your data to provide personalized savings
+              projections
+            </p>
           </div>
         ) : (
           <>
@@ -262,225 +324,350 @@ export default function RoiCalculator() {
             </div>
             {/* Step 1: Restaurant Info */}
             {currentStep === 1 && (
-            <div className="mb-8 px-4 sm:px-8 md:px-8">
+              <div className="mb-8 px-4 sm:px-8 md:px-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-5">
-                    Restaurant Details
+                  Restaurant Details
                 </h2>
                 <div className="">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-4">
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Restaurant Name</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Restaurant Name
+                      </label>
+                      <input
                         type="text"
                         value={formData.restaurantName}
-                        onChange={e => updateFormData("restaurantName", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("restaurantName", e.target.value)
+                        }
                         placeholder="Enter your restaurant name"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.restaurantName && <div className="text-red-500 text-xs mt-1">{errors.restaurantName}</div>}
+                      />
+                      {errors.restaurantName && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.restaurantName}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">City Name</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        City Name
+                      </label>
+                      <input
                         type="text"
                         value={formData.restaurantLocation}
-                        onChange={e => updateFormData("restaurantLocation", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("restaurantLocation", e.target.value)
+                        }
                         placeholder="Enter your city/state"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.restaurantLocation && <div className="text-red-500 text-xs mt-1">{errors.restaurantLocation}</div>}
+                      />
+                      {errors.restaurantLocation && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.restaurantLocation}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                      </label>
+                      <div className="relative">
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                        <Mail size={18} />
+                          <Mail size={18} />
                         </span>
                         <input
-                        type="email"
-                        value={formData.email}
-                        onChange={e => updateFormData("email", e.target.value)}
-                        placeholder="deepak@example.com"
-                        className="border border-gray-200 rounded-md pl-10 pr-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) =>
+                            updateFormData("email", e.target.value)
+                          }
+                          placeholder="deepak@example.com"
+                          className="border border-gray-200 rounded-md pl-10 pr-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
-                    {errors.email && <div className="text-red-500 text-xs mt-1">{errors.email}</div>}
+                      </div>
+                      {errors.email && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.email}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Phone
+                      </label>
+                      <input
                         type="tel"
                         value={formData.phone}
-                        onChange={e => updateFormData("phone", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("phone", e.target.value)
+                        }
                         placeholder="08887776666"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.phone && <div className="text-red-500 text-xs mt-1">{errors.phone}</div>}
+                      />
+                      {errors.phone && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.phone}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-end pt-4">
-                    <Button onClick={nextStep} disabled={!isStepValid(1)}>
+                  <Button onClick={nextStep} disabled={!isStepValid(1)}>
                     Next <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
+                  </Button>
                 </div>
-            </div>
+              </div>
             )}
             {/* Step 2: Revenue & Type */}
             {currentStep === 2 && (
-            <div className="mb-8">
+              <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-5">
-                    Revenue & Type
+                  Revenue & Type
                 </h2>
                 <div className="px-2 sm:px-4 md:px-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-4">
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Weekly Revenue (₹)</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Weekly Revenue (₹)
+                      </label>
+                      <input
                         type="number"
                         value={formData.weeklyRevenue}
-                        onChange={e => updateFormData("weeklyRevenue", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("weeklyRevenue", e.target.value)
+                        }
                         placeholder="25000"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.weeklyRevenue && <div className="text-red-500 text-xs mt-1">{errors.weeklyRevenue}</div>}
+                      />
+                      {errors.weeklyRevenue && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.weeklyRevenue}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Number of Locations</label>
-                    <div className="flex items-center gap-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Number of Locations
+                      </label>
+                      <div className="flex items-center gap-2">
                         <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => updateFormData("locations", Math.max(1, formData.locations - 1))}
-                        disabled={formData.locations <= 1}
+                          variant="outline"
+                          size="icon"
+                          onClick={() =>
+                            updateFormData(
+                              "locations",
+                              Math.max(1, formData.locations - 1),
+                            )
+                          }
+                          disabled={formData.locations <= 1}
                         >
-                        <Minus className="w-4 h-4" />
+                          <Minus className="w-4 h-4" />
                         </Button>
-                        <div className="w-16 text-center text-lg font-semibold">{formData.locations}</div>
+                        <div className="w-16 text-center text-lg font-semibold">
+                          {formData.locations}
+                        </div>
                         <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => updateFormData("locations", formData.locations + 1)}
+                          variant="outline"
+                          size="icon"
+                          onClick={() =>
+                            updateFormData("locations", formData.locations + 1)
+                          }
                         >
-                        <Plus className="w-4 h-4" />
+                          <Plus className="w-4 h-4" />
                         </Button>
-                    </div>
-                    {errors.locations && <div className="text-red-500 text-xs mt-1">{errors.locations}</div>}
+                      </div>
+                      {errors.locations && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.locations}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Restaurant Type</label>
-                    <select
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Restaurant Type
+                      </label>
+                      <select
                         value={formData.restaurantType}
-                        onChange={e => updateFormData("restaurantType", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("restaurantType", e.target.value)
+                        }
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="" disabled>Select type</option>
-                        <option value="fsr">Full Service Restaurant (FSR)</option>
-                        <option value="qsr">Quick Service Restaurant (QSR)</option>
+                      >
+                        <option value="" disabled>
+                          Select type
+                        </option>
+                        <option value="fsr">
+                          Full Service Restaurant (FSR)
+                        </option>
+                        <option value="qsr">
+                          Quick Service Restaurant (QSR)
+                        </option>
                         <option value="cafe">Café</option>
                         <option value="cloud-kitchen">Cloud Kitchen</option>
                         <option value="fast-casual">Fast Casual</option>
                         <option value="fine-dining">Fine Dining</option>
-                    </select>
-                    {errors.restaurantType && <div className="text-red-500 text-xs mt-1">{errors.restaurantType}</div>}
+                      </select>
+                      {errors.restaurantType && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.restaurantType}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Business Structure</label>
-                    <select
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Business Structure
+                      </label>
+                      <select
                         value={formData.businessStructure}
-                        onChange={e => updateFormData("businessStructure", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("businessStructure", e.target.value)
+                        }
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="" disabled>Select structure</option>
+                      >
+                        <option value="" disabled>
+                          Select structure
+                        </option>
                         <option value="franchisee">Franchisee</option>
                         <option value="franchisor">Franchisor</option>
                         <option value="independent">Independent</option>
-                    </select>
-                    {errors.businessStructure && <div className="text-red-500 text-xs mt-1">{errors.businessStructure}</div>}
+                      </select>
+                      {errors.businessStructure && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.businessStructure}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-between pt-4">
-                    <Button variant="outline" onClick={prevStep}>
+                  <Button variant="outline" onClick={prevStep}>
                     <ChevronLeft className="w-4 h-4 mr-2" /> Previous
-                    </Button>
-                    <Button onClick={nextStep} disabled={!isStepValid(2)}>
+                  </Button>
+                  <Button onClick={nextStep} disabled={!isStepValid(2)}>
                     Next <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
+                  </Button>
                 </div>
-            </div>
+              </div>
             )}
             {/* Step 3: Operations & Concept */}
             {currentStep === 3 && (
-            <div className="mb-8">
+              <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-5">
-                    Operations & Concept
+                  Operations & Concept
                 </h2>
                 <div className="px-2 sm:px-4 md:px-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-4">
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Current COGS (%)</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Current COGS (%)
+                      </label>
+                      <input
                         type="number"
                         value={formData.currentCOGS}
-                        onChange={e => updateFormData("currentCOGS", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("currentCOGS", e.target.value)
+                        }
                         placeholder="30"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.currentCOGS && <div className="text-red-500 text-xs mt-1">{errors.currentCOGS}</div>}
+                      />
+                      {errors.currentCOGS && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.currentCOGS}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Target/Ideal COGS (%)</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Target/Ideal COGS (%)
+                      </label>
+                      <input
                         type="number"
                         value={formData.targetCOGS}
-                        onChange={e => updateFormData("targetCOGS", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("targetCOGS", e.target.value)
+                        }
                         placeholder="27"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.targetCOGS && <div className="text-red-500 text-xs mt-1">{errors.targetCOGS}</div>}
+                      />
+                      {errors.targetCOGS && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.targetCOGS}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Current Labor (%)</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Current Labor (%)
+                      </label>
+                      <input
                         type="number"
                         value={formData.currentLabor}
-                        onChange={e => updateFormData("currentLabor", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("currentLabor", e.target.value)
+                        }
                         placeholder="28"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.currentLabor && <div className="text-red-500 text-xs mt-1">{errors.currentLabor}</div>}
+                      />
+                      {errors.currentLabor && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.currentLabor}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Target Labor (%)</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Target Labor (%)
+                      </label>
+                      <input
                         type="number"
                         value={formData.targetLabor}
-                        onChange={e => updateFormData("targetLabor", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("targetLabor", e.target.value)
+                        }
                         placeholder="25"
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.targetLabor && <div className="text-red-500 text-xs mt-1">{errors.targetLabor}</div>}
+                      />
+                      {errors.targetLabor && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.targetLabor}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Primary Cuisine Type</label>
-                    <input
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Primary Cuisine Type
+                      </label>
+                      <input
                         type="text"
                         value={formData.cuisineType}
-                        onChange={e => updateFormData("cuisineType", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("cuisineType", e.target.value)
+                        }
                         placeholder="Italian, Indian, American, etc."
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.cuisineType && <div className="text-red-500 text-xs mt-1">{errors.cuisineType}</div>}
+                      />
+                      {errors.cuisineType && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.cuisineType}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Current POS System</label>
-                    <select
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Current POS System
+                      </label>
+                      <select
                         value={formData.posSystem}
-                        onChange={e => updateFormData("posSystem", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("posSystem", e.target.value)
+                        }
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="" disabled>Select POS</option>
+                      >
+                        <option value="" disabled>
+                          Select POS
+                        </option>
                         <option value="petpooja">PetPooja</option>
                         <option value="restroworks">Restroworks</option>
                         <option value="dotpe">Rista/ Dotpe</option>
@@ -489,49 +676,73 @@ export default function RoiCalculator() {
                         <option value="zoho">Zoho</option>
                         <option value="limetray">LimeTray</option>
                         <option value="other">Other</option>
-                    </select>
-                    {errors.posSystem && <div className="text-red-500 text-xs mt-1">{errors.posSystem}</div>}
+                      </select>
+                      {errors.posSystem && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.posSystem}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">BOH System Present</label>
-                    <select
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        BOH System Present
+                      </label>
+                      <select
                         value={formData.bohSystem}
-                        onChange={e => updateFormData("bohSystem", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("bohSystem", e.target.value)
+                        }
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="" disabled>Select</option>
+                      >
+                        <option value="" disabled>
+                          Select
+                        </option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
-                    </select>
-                    {errors.bohSystem && <div className="text-red-500 text-xs mt-1">{errors.bohSystem}</div>}
+                      </select>
+                      {errors.bohSystem && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.bohSystem}
+                        </div>
+                      )}
                     </div>
                     <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Improvement Area</label>
-                    <select
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Improvement Area
+                      </label>
+                      <select
                         value={formData.improvementArea}
-                        onChange={e => updateFormData("improvementArea", e.target.value)}
+                        onChange={(e) =>
+                          updateFormData("improvementArea", e.target.value)
+                        }
                         className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="" disabled>Select area</option>
+                      >
+                        <option value="" disabled>
+                          Select area
+                        </option>
                         <option value="cogs">COGS</option>
                         <option value="labor">Labor</option>
                         <option value="lost-sales">Reducing Lost Sales</option>
                         <option value="efficiency">Efficiency</option>
                         <option value="systemization">Systemization</option>
-                    </select>
-                    {errors.improvementArea && <div className="text-red-500 text-xs mt-1">{errors.improvementArea}</div>}
+                      </select>
+                      {errors.improvementArea && (
+                        <div className="text-red-500 text-xs mt-1">
+                          {errors.improvementArea}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-between pt-4">
-                    <Button variant="outline" onClick={prevStep}>
+                  <Button variant="outline" onClick={prevStep}>
                     <ChevronLeft className="w-4 h-4 mr-2" /> Previous
-                    </Button>
-                    <Button onClick={nextStep} disabled={!isStepValid(3)}>
+                  </Button>
+                  <Button onClick={nextStep} disabled={!isStepValid(3)}>
                     Calculate ROI <BarChart3 className="w-4 h-4 ml-2" />
-                    </Button>
+                  </Button>
                 </div>
-            </div>
+              </div>
             )}
           </>
         )}
@@ -552,10 +763,14 @@ export default function RoiCalculator() {
   );
 }
 
-function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProps) {
+function ResultsPage({
+  formData,
+  generateChartData,
+  onRestart,
+}: ResultsPageProps) {
   // const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const results = calculateResults();
+  //   const results = calculateResults();
   const chartDataArr = generateChartData();
   const months = chartDataArr.map((d) => `Month ${d.month}`);
   const additionalProfit = chartDataArr.map((d) => d.additionalProfit);
@@ -566,25 +781,25 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
     labels: months,
     datasets: [
       {
-        type: 'bar' as const,
-        label: 'Additional Profit',
+        type: "bar" as const,
+        label: "Additional Profit",
         data: additionalProfit,
-        backgroundColor: '#4d77ff',
+        backgroundColor: "#4d77ff",
         borderRadius: 8,
-        yAxisID: 'y',
+        yAxisID: "y",
         barPercentage: 0.6,
         categoryPercentage: 0.6,
       },
       {
-        type: 'line' as const,
-        label: 'GHG Reduction (tons)',
+        type: "line" as const,
+        label: "GHG Reduction (tons)",
         data: ghgReduction,
-        borderColor: '#22c55e',
-        backgroundColor: '#22c55e',
-        yAxisID: 'y1',
+        borderColor: "#22c55e",
+        backgroundColor: "#22c55e",
+        yAxisID: "y1",
         tension: 0.4,
         pointRadius: 4,
-        pointBackgroundColor: '#22c55e',
+        pointBackgroundColor: "#22c55e",
         fill: false,
       },
     ],
@@ -595,23 +810,24 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
     plugins: {
       legend: {
         display: true,
-        position: 'top' as const,
+        position: "top" as const,
         labels: {
-          color: '#181d27',
-          font: { size: 14, family: 'inherit' },
+          color: "#181d27",
+          font: { size: 14, family: "inherit" },
         },
       },
       tooltip: {
         enabled: true,
         callbacks: {
-          label: function (context: TooltipItem<'bar'>) {
-            if (context.dataset.label === 'Additional Profit') {
-              return ` $${context.parsed.y.toLocaleString()}`;
+          label: function (context: any) {
+            const yValue = context.parsed.y ?? 0;
+            if (context.dataset.label === "Additional Profit") {
+              return ` $${yValue.toLocaleString()}`;
             }
-            if (context.dataset.label === 'GHG Reduction (tons)') {
-              return ` ${context.parsed.y} tons`;
+            if (context.dataset.label === "GHG Reduction (tons)") {
+              return ` ${yValue} tons`;
             }
-            return `${context.parsed.y}`;
+            return `${yValue}`;
           },
         },
       },
@@ -619,20 +835,30 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
     scales: {
       x: {
         grid: { display: false },
-        ticks: { color: '#535862', font: { size: 12 } },
+        ticks: { color: "#535862", font: { size: 12 } },
       },
       y: {
         beginAtZero: true,
-        position: 'left' as const,
-        title: { display: true, text: 'Additional Profit (₹)', color: '#4d77ff', font: { size: 13 } },
-        ticks: { color: '#4d77ff', font: { size: 12 } },
-        grid: { color: '#e5e7eb', borderDash: [4, 4] },
+        position: "left" as const,
+        title: {
+          display: true,
+          text: "Additional Profit (₹)",
+          color: "#4d77ff",
+          font: { size: 13 },
+        },
+        ticks: { color: "#4d77ff", font: { size: 12 } },
+        grid: { color: "#e5e7eb", borderDash: [4, 4] },
       },
       y1: {
         beginAtZero: true,
-        position: 'right' as const,
-        title: { display: true, text: 'GHG Reduction (tons)', color: '#22c55e', font: { size: 13 } },
-        ticks: { color: '#22c55e', font: { size: 12 } },
+        position: "right" as const,
+        title: {
+          display: true,
+          text: "GHG Reduction (tons)",
+          color: "#22c55e",
+          font: { size: 13 },
+        },
+        ticks: { color: "#22c55e", font: { size: 12 } },
         grid: { drawOnChartArea: false },
       },
     },
@@ -677,18 +903,20 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
 
   return (
     <div className="space-y-8">
-        <div className="mb-8">
-          <TextSection
-            subtitle="ROI Calculator"
-            title="Your Estimated Savings with Orkeneo"
-            html={`Based on your <span class="uppercase font-bold">${formData.locations} ${formData.restaurantType}</span> location${formData.locations > 1 ? "s" : ""}`}
-          />
-        </div>
+      <div className="mb-8">
+        <TextSection
+          subtitle="ROI Calculator"
+          title="Your Estimated Savings with Orkeneo"
+          html={`Based on your <span class="uppercase font-bold">${formData.locations} ${formData.restaurantType}</span> location${formData.locations > 1 ? "s" : ""}`}
+        />
+      </div>
       {/* Main Content Grid */}
       <div className="">
         {/* How We Calculate: Key Benefits style */}
         <div className="mb-8 w-full flex flex-col items-center">
-          <h2 className="text-lg font-semibold text-gray-900 my-8 text-center">How We Calculate Your Potential Savings</h2>
+          <h2 className="text-lg font-semibold text-gray-900 my-8 text-center">
+            How We Calculate Your Potential Savings
+          </h2>
           <div className="grid gap-10 max-[460]:grid-cols-1 max-[640]:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 max-w-7xl mx-auto w-full">
             {/* Food Cost Reduction */}
             <div className="flex flex-col items-center text-center px-2">
@@ -696,7 +924,9 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
                 <UtensilsCrossed className="w-5 h-5 text-blue-600" />
               </ShadowCircle>
               <h3 className="font-semibold my-2">Food Cost Reduction</h3>
-              <p className="text-sm text-gray-600">Save 3–8% via AI-based menu prep & demand forecasting.</p>
+              <p className="text-sm text-gray-600">
+                Save 3–8% via AI-based menu prep & demand forecasting.
+              </p>
             </div>
             {/* Labor Optimization */}
             <div className="flex flex-col items-center text-center px-2">
@@ -704,7 +934,9 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
                 <Clock className="w-5 h-5 text-blue-600" />
               </ShadowCircle>
               <h3 className="font-semibold my-2">Labor Optimization</h3>
-              <p className="text-sm text-gray-600">Cut 4–10% labor cost using forecasted staffing plans.</p>
+              <p className="text-sm text-gray-600">
+                Cut 4–10% labor cost using forecasted staffing plans.
+              </p>
             </div>
             {/* Revenue Increase */}
             <div className="flex flex-col items-center text-center px-2">
@@ -712,7 +944,9 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
                 <TrendingUp className="w-5 h-5 text-blue-600" />
               </ShadowCircle>
               <h3 className="font-semibold my-2">Revenue Increase</h3>
-              <p className="text-sm text-gray-600">Boost 1.5–4% revenue via smart menus & fewer stockouts.</p>
+              <p className="text-sm text-gray-600">
+                Boost 1.5–4% revenue via smart menus & fewer stockouts.
+              </p>
             </div>
             {/* Sustainability */}
             <div className="flex flex-col items-center text-center px-2">
@@ -720,78 +954,116 @@ function ResultsPage({ formData, generateChartData, onRestart }: ResultsPageProp
                 <Leaf className="w-5 h-5 text-blue-600" />
               </ShadowCircle>
               <h3 className="font-semibold my-2">Sustainability</h3>
-              <p className="text-sm text-gray-600">Reduce waste = lower emissions, better margins.</p>
+              <p className="text-sm text-gray-600">
+                Reduce waste = lower emissions, better margins.
+              </p>
             </div>
           </div>
         </div>
         {/* Right Panel: Chart */}
         <div className="lg:col-span-3">
           <div className="h-fit p-6">
-              <h2 className="text-lg font-semibold text-gray-900">Comparing current vs. projected savings over 12 months</h2>
-              <div className="h-96 flex items-center justify-center">
-                <ChartJSComponent type="bar" data={data} options={options} style={{ width: '100%', height: '100%' }} />
-              </div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Comparing current vs. projected savings over 12 months
+            </h2>
+            <div className="h-96 flex items-center justify-center">
+              <ChartJSComponent
+                type="bar"
+                data={data}
+                options={options}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
           </div>
         </div>
       </div>
       {/* End Main Content Grid */}
       {/* Summary Table */}
       <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Savings Summary Breakdown</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Metric</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Current</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Target</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Improvement</th>
-                </tr>
-              </thead>
-              <tbody>
-                {summaryData.map((row: typeof summaryData[0], index: number) => (
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          Savings Summary Breakdown
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-slate-200">
+                <th className="text-left py-3 px-4 font-semibold text-gray-900">
+                  Metric
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900">
+                  Current
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900">
+                  Target
+                </th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-900">
+                  Improvement
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {summaryData.map(
+                (row: (typeof summaryData)[0], index: number) => (
                   <tr key={index} className="border-b border-slate-100">
-                    <td className="py-3 px-4 text-gray-900 font-medium">{row.metric}</td>
+                    <td className="py-3 px-4 text-gray-900 font-medium">
+                      {row.metric}
+                    </td>
                     <td className="py-3 px-4 text-gray-600">{row.current}</td>
                     <td className="py-3 px-4 text-gray-600">{row.target}</td>
                     <td className="py-3 px-4">
                       <Badge
                         variant="subtle"
-                        color={row.improvement.startsWith("+") ? "green" : "blue"}
+                        color={
+                          row.improvement.startsWith("+") ? "green" : "blue"
+                        }
                       >
                         {row.improvement}
                       </Badge>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                ),
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="bg-gradient-to-r from-[#4d77ff] to-blue-700 text-white rounded-lg">
-          <div className="max-w-2xl mx-auto p-10">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Restaurant?</h3>
-            <p className="mb-8 text-lg">Get personalized insights and save more with AI.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="bg-white text-[#4d77ff] hover:bg-slate-100 font-semibold px-8 py-3 text-lg" onClick={() => setIsModalOpen(true)}>
-                <Calendar className="w-5 h-5 mr-2" />
-                Get Early Access
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#4d77ff] font-semibold px-8 py-3 text-lg bg-transparent"
-                onClick={onRestart}
-              >
-                Calculate again
-              </Button>
-            </div>
-            <p className="text-blue-100 text-sm mt-4">
-              30-minute personalized demo • No commitment required • See results in real-time
-            </p>
+      <div className="bg-linear-to-r from-[#4d77ff] to-blue-700 text-white rounded-lg">
+        <div className="max-w-2xl mx-auto p-10">
+          <h3 className="text-2xl font-bold mb-4">
+            Ready to Transform Your Restaurant?
+          </h3>
+          <p className="mb-8 text-lg">
+            Get personalized insights and save more with AI.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white text-[#4d77ff] hover:bg-slate-100 font-semibold px-8 py-3 text-lg"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Calendar className="w-5 h-5 mr-2" />
+              Get Early Access
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-[#4d77ff] font-semibold px-8 py-3 text-lg bg-transparent"
+              onClick={onRestart}
+            >
+              Calculate again
+            </Button>
           </div>
+          <p className="text-blue-100 text-sm mt-4">
+            30-minute personalized demo • No commitment required • See results
+            in real-time
+          </p>
+        </div>
       </div>
-      <BookDemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <BookDemoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

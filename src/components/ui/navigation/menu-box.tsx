@@ -69,7 +69,7 @@ export const MenuBox: React.FC<MenuBoxProps> = ({
           {active === item && (
             <div
               ref={dropdownRef}
-              className={`absolute top-[calc(100%_+_0.5rem)] pt-4 z-99 ${
+              className={`absolute top-[calc(100%+0.5rem)] pt-4 z-99 ${
                 alignRight ? "-right-40" : "-left-40"
               }`}
             >

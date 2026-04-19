@@ -136,7 +136,7 @@ export default function AiKitchenSection() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="bg-white rounded-4xl shadow-xl px-5 py-4 w-[280px] sm:w-70 border border-indigo-50"
+              className="bg-white rounded-4xl shadow-xl px-5 py-4 w-70 sm:w-70 border border-indigo-50"
             >
               <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-wide flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />

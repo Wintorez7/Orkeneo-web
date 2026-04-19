@@ -14,7 +14,7 @@ interface MenuItemProp {
   notAvailable?: boolean;
 }
 
-const itemVariants = {
+const itemVariants: any = {
   hidden: { opacity: 0, y: 10 },
   visible: (i: number) => ({
     opacity: 1,
