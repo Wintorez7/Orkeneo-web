@@ -97,18 +97,18 @@ export const MobileMenu: React.FC<MobileMenuProp> = ({
                     >
                       <span className="text-lg text-gray-800">{label}</span>
                       {items && items.length > 0 && (
-                          <motion.div
-                            animate={{ rotate: expandedItems[label] ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <Icon
-                              icon="mdi:chevron-down"
-                              width={24}
-                              height={24}
-                              color="#000000"
-                            />
-                          </motion.div>
-                        )}
+                        <motion.div
+                          animate={{ rotate: expandedItems[label] ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Icon
+                            icon="mdi:chevron-down"
+                            width={24}
+                            height={24}
+                            color="#000000"
+                          />
+                        </motion.div>
+                      )}
                     </div>
 
                     <AnimatePresence>
@@ -134,12 +134,22 @@ export const MobileMenu: React.FC<MobileMenuProp> = ({
                                     toggleMenu(false); // Close menu on navigation
                                   }}
                                 >
-                                  <Icon
-                                    icon={item.icon}
-                                    width={16}
-                                    height={16}
-                                    color="#517aff"
-                                  />
+                                  {item.icon.startsWith("/") ? (
+                                    <Image
+                                      src={item.icon}
+                                      alt={item.name}
+                                      width={(item as any).iconWidth || 16}
+                                      height={(item as any).iconHeight || 16}
+                                      className="object-contain"
+                                    />
+                                  ) : (
+                                    <Icon
+                                      icon={item.icon}
+                                      width={(item as any).iconWidth || 16}
+                                      height={(item as any).iconHeight || 16}
+                                      color="#517aff"
+                                    />
+                                  )}
                                   <span className="text-gray-800">
                                     {item.name}
                                   </span>

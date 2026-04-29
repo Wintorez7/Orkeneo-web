@@ -1,7 +1,20 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"); */
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+
+/* Tell v4 where to scan for classes */
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
+
+/* Migrate theme extensions into @theme */
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+}
+
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 

@@ -28,6 +28,8 @@ interface NavMenuItem {
 
 interface NavMenuItemChild {
   icon?: string;
+  iconWidth?: number;
+  iconHeight?: number;
   label?: string;
   description?: string;
   href?: string;
@@ -42,6 +44,8 @@ interface NavMenuItemChild {
 
 interface LeftItem {
   icon: string;
+  iconWidth?: number;
+  iconHeight?: number;
   label: string;
   description: string;
   href?: string;
@@ -153,35 +157,43 @@ const productDropdown: DropdownData = {
 const whoDropdown: DropdownData = {
   leftItems: [
     {
-      icon: "solar:cloud-line-duotone",
+      icon: "/images/cloud-icon.png",
       label: "Cloud Kitchens",
+      iconWidth: 17,
+      iconHeight: 16,
       description:
         "Optimize prep workflows and minimize waste in high-volume dark kitchens.",
       href: "/cloud-kitchen",
     },
     {
-      icon: "solar:bolt-line-duotone",
+      icon: "/images/qsr-chains.png",
       label: "QSR Chains",
+      iconWidth: 17,
+      iconHeight: 16,
       description:
         "Standardize operations across hundreds of franchise locations instantly.",
       href: "/qsr-chains",
     },
     {
-      icon: "solar:cup-hot-line-duotone",
+      icon: "/images/cafe-icon.png",
       label: "Cafes",
+      iconWidth: 17,
+      iconHeight: 16,
       description:
         "Manage peak demand spikes with precision automated ordering systems.",
       href: "/cafes",
     },
     {
-      icon: "solar:star-shine-line-duotone",
+      icon: "/images/fine-dining.png",
       label: "Fine Dining",
+      iconWidth: 17,
+      iconHeight: 16,
       description:
         "Precision ingredient planning and labor allocation for elite service.",
       href: "/fine-dining",
     },
     {
-      icon: "solar:map-point-wave-line-duotone",
+      icon: "/images/multi-location-icon.png",
       label: "Multi-location Brands",
       description:
         "Centralized intelligence dashboard for comprehensive corporate oversight.",
@@ -293,13 +305,23 @@ function DropdownPanel({ data, label }: { data: DropdownData; label: string }) {
                   whileHover={{ y: -2 }}
                   className="flex items-start gap-3 cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                    <Icon
-                      icon={item.icon}
-                      className="text-blue-600"
-                      width={44}
-                      height={20}
-                    />
+                  <div className="w-28 h-11 rounded-full bg-blue-50 flex items-center justify-center">
+                    {item.icon.startsWith("/") ? (
+                      <Image
+                        src={item.icon}
+                        alt={item.label}
+                        width={item.iconWidth || 24}
+                        height={item.iconHeight || 24}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <Icon
+                        icon={item.icon}
+                        className="text-blue-600"
+                        width={item.iconWidth || 44}
+                        height={item.iconHeight || 20}
+                      />
+                    )}
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-900">
@@ -328,12 +350,22 @@ function DropdownPanel({ data, label }: { data: DropdownData; label: string }) {
                 >
                   {/* ICON */}
                   <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                    <Icon
-                      icon={item.icon}
-                      className="text-blue-600"
-                      width={44}
-                      height={24}
-                    />
+                    {item.icon.startsWith("/") ? (
+                      <Image
+                        src={item.icon}
+                        alt={item.label}
+                        width={item.iconWidth || 24}
+                        height={item.iconHeight || 24}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <Icon
+                        icon={item.icon}
+                        className="text-blue-600"
+                        width={item.iconWidth || 44}
+                        height={item.iconHeight || 24}
+                      />
+                    )}
                   </div>
 
                   {/* TEXT */}
@@ -382,12 +414,22 @@ function DropdownPanel({ data, label }: { data: DropdownData; label: string }) {
                   className="w-12 h-12 rounded-full flex items-center justify-center"
                   style={{ backgroundColor: item.color }}
                 >
-                  <Icon
-                    icon={item.icon}
-                    className="text-white"
-                    width={42}
-                    height={22}
-                  />
+                  {item.icon.startsWith("/") ? (
+                    <Image
+                      src={item.icon}
+                      alt={item.label}
+                      width={item.iconWidth || 24}
+                      height={item.iconHeight || 24}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <Icon
+                      icon={item.icon}
+                      className="text-white"
+                      width={item.iconWidth || 42}
+                      height={item.iconHeight || 22}
+                    />
+                  )}
                 </div>
 
                 <div>
@@ -412,12 +454,22 @@ function DropdownPanel({ data, label }: { data: DropdownData; label: string }) {
                   className="p-4 rounded-xl border border-gray-100 hover:shadow-md cursor-pointer"
                 >
                   <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
-                    <Icon
-                      icon={item.icon}
-                      className="text-blue-600"
-                      width={20}
-                      height={20}
-                    />
+                    {item.icon.startsWith("/") ? (
+                      <Image
+                        src={item.icon}
+                        alt={item.label}
+                        width={item.iconWidth || 20}
+                        height={item.iconHeight || 20}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <Icon
+                        icon={item.icon}
+                        className="text-blue-600"
+                        width={item.iconWidth || 20}
+                        height={item.iconHeight || 20}
+                      />
+                    )}
                   </div>
 
                   <p className="text-sm font-semibold text-gray-900">
