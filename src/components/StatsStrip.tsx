@@ -1,28 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-import { fadeUp, fadeRight } from "@/lib/animations/variants";
-import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
+import { fadeUp } from "@/lib/animations/variants";
 import MotionWrapper from "./motion/MotionWrapper";
 import MotionStagger from "./motion/MotionStagger";
+import AnimatedCounter from "./motion/AnimatedCounter";
 
 export default function StatsStrip() {
   const stats = [
     {
-      value: "+40%",
+      prefix: "+",
+      to: 40,
+      suffix: "%",
       label: "Average profit uplift",
       color: "text-emerald-600",
       underline: "bg-emerald-300",
     },
     {
-      value: "55%",
+      prefix: "",
+      to: 55,
+      suffix: "%",
       label: "Reduction in food waste",
       color: "text-blue-500",
       underline: "bg-blue-200",
     },
     {
-      value: "-20%",
+      prefix: "-",
+      to: 20,
+      suffix: "%",
       label: "Labor cost efficiency",
       color: "text-purple-500",
       underline: "bg-purple-200",
@@ -41,14 +46,19 @@ export default function StatsStrip() {
                 className="flex flex-col items-center group"
               >
                 {/* VALUE */}
-                <motion.h3
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.4 }}
-                  className={`text-5xl md:text-6xl font-bold ${stat.color}`}
                 >
-                  {stat.value}
-                </motion.h3>
+                  <AnimatedCounter
+                    to={stat.to}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                    duration={2}
+                    className={`text-5xl md:text-6xl font-bold ${stat.color}`}
+                  />
+                </motion.div>
 
                 {/* LABEL */}
                 <motion.p
@@ -60,7 +70,7 @@ export default function StatsStrip() {
                   {stat.label}
                 </motion.p>
 
-                {/* UNDERLINE (animated grow) */}
+                {/* UNDERLINE */}
                 <motion.div
                   initial={{ width: 0, opacity: 0 }}
                   whileInView={{ width: "3rem", opacity: 1 }}

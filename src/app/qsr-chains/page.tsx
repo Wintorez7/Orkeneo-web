@@ -22,6 +22,7 @@ import { BarChart3, Package, Users } from "lucide-react";
 import Image from "next/image";
 import MotionCard from "@/components/motion/MotionCard";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
 
 const transformationComparison = {
   withoutTitle: "Before Orkeneo",
@@ -201,19 +202,26 @@ export default function MultiLocationSection() {
 
   const stats = [
     {
-      value: "+18%",
+      prefix: "+",
+      to: 18,
+      suffix: "%",
       title: "margin increase",
       desc: "Standardized profitability regardless of outlet manager experience levels.",
       color: "text-blue-600",
     },
     {
-      value: "₹4.5L",
+      prefix: "₹",
+      to: 4.5,
+      suffix: "L",
+      decimals: 1,
       title: "monthly savings",
       desc: "Direct profit recovery through reduced waste and optimized labor spend.",
       color: "text-emerald-600",
     },
     {
-      value: "3x",
+      prefix: "",
+      to: 3,
+      suffix: "x",
       title: "faster decisions",
       desc: "Move from monthly retrospectives to daily proactive optimizations with AI.",
       color: "text-purple-600",
@@ -596,7 +604,16 @@ export default function MultiLocationSection() {
                   </h3>
 
                   <div className="flex items-baseline gap-1 mt-2">
-                    <span className="text-5xl font-extrabold">₹55,000</span>
+                    <span className="text-5xl font-extrabold">
+                      <AnimatedCounter
+                        to={55}
+                        prefix="₹"
+                        suffix=",000"
+                        decimals={0}
+                        duration={2}
+                        className="text-5xl font-extrabold"
+                      />
+                    </span>
                   </div>
 
                   <p className="text-blue-100 text-sm mt-1 font-medium">
@@ -816,11 +833,14 @@ export default function MultiLocationSection() {
           {stats.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
               {/* VALUE */}
-              <h2
+              <AnimatedCounter
+                to={item.to}
+                prefix={item.prefix}
+                suffix={item.suffix}
+                decimals={item.decimals}
+                duration={2}
                 className={`text-5xl md:text-6xl font-extrabold ${item.color}`}
-              >
-                {item.value}
-              </h2>
+              />
 
               {/* TITLE */}
               <p className="mt-4 text-lg text-white font-semibold capitalize">

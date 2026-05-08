@@ -14,7 +14,7 @@ import { stepConfig } from "@/lib/rpiStepsConfig";
 import MotionWrapper from "@/components/motion/MotionWrapper";
 
 export default function RpiCalculatePage() {
-  const { step, setStep, data, setData, result } = useRpiCalculator();
+  const { step, setStep, data, setData, result, goBack } = useRpiCalculator();
 
   const validations: any = {
     1: (data: any) => data.name && data.city && data.type,
@@ -30,7 +30,7 @@ export default function RpiCalculatePage() {
       return;
     }
 
-    setStep((s) => (s < 5 ? ((s + 1) as any) : s));
+    setStep(step < 5 ? step + 1 : step);
   };
 
   if (step === 5) {
@@ -53,13 +53,18 @@ export default function RpiCalculatePage() {
       {/* CONTENT */}
       <div className="relative z-10">
         <MotionWrapper variants={fadeIn}>
-          <StepCard config={config} step={step}>
+          <StepCard config={config} step={step} goBack={goBack}>
             <MotionWrapper key={step} variants={fadeUp}>
               {step === 1 && (
                 <Step1 data={data} setData={setData} next={next} />
               )}
               {step === 2 && (
-                <Step2 data={data} setData={setData} next={next} />
+                <Step2
+                  data={data}
+                  setData={setData}
+                  next={next}
+                  result={result}
+                />
               )}
               {step === 3 && (
                 <Step3

@@ -1,9 +1,8 @@
 import { calculateDetailedLoss } from "@/lib/rpiFormula";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export function useRpiCalculator() {
-  const [step, setStep] = useState(1);
-
+  const [stepHistory, setStepHistory] = useState<number[]>([1]);
   const [data, setData] = useState({
     name: "",
     city: "",
@@ -14,16 +13,27 @@ export function useRpiCalculator() {
     consistency: 50,
   });
 
+  const step = stepHistory[stepHistory.length - 1];
+
   const result = calculateDetailedLoss({
     revenue: data.revenue,
     foodPct: data.foodPct,
     staffPct: data.staffPct,
-    consistency: data.consistency
+    consistency: data.consistency,
   });
+
+  const goToStep = useCallback((newStep: number) => {
+    setStepHistory(prev => [...prev, newStep]);
+  }, []);
+
+  const goBack = useCallback(() => {
+    setStepHistory(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+  }, []);
 
   return {
     step,
-    setStep,
+    setStep: goToStep,
+    goBack,
     data,
     setData,
     result,

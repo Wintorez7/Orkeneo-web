@@ -11,10 +11,10 @@ import MotionStagger from "@/components/motion/MotionStagger";
 import {
   STAFFING_CARDS,
   STAFFING_STEPS,
-  STAFFING_STATS,
   STAFFING_COMPARISON,
   STAFFING_HERO,
 } from "@/lib/staffing.data";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
 
 interface CostCardProps {
   icon: React.ElementType;
@@ -26,6 +26,27 @@ interface CostCardProps {
   costLabel: string;
   costColor: string;
 }
+
+const STAFFING_STATS = [
+  {
+    prefix: "+",
+    to: 25,
+    suffix: "%",
+    label: "Labor Efficiency",
+  },
+  {
+    prefix: "-",
+    to: 18,
+    suffix: "%",
+    label: "Overstaffing",
+  },
+  {
+    prefix: "+",
+    to: 40,
+    suffix: "%",
+    label: "Peak Hour Accuracy",
+  },
+];
 
 const CostCard = ({
   icon: Icon,
@@ -276,18 +297,83 @@ export default function StaffingHero() {
       <ComparisonSection {...STAFFING_COMPARISON} />
 
       {/* STATS */}
-      <section className="w-full bg-[#2f3640] py-16 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 text-center gap-10">
-          {STAFFING_STATS.map((stat, i) => (
-            <div key={i}>
-              <h2 className="text-4xl font-bold text-[#6ef3c5]">
-                {stat.value}
-              </h2>
-              <p className="text-white/70 text-sm mt-2 uppercase">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+      <section className="w-full bg-[#2f3640] py-16 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <MotionStagger className="grid md:grid-cols-3 text-center gap-10">
+            {STAFFING_STATS.map((stat, i) => (
+              <MotionWrapper key={i} variants={fadeUp} delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.25 }}
+                  className="flex flex-col items-center"
+                >
+                  {/* Animated Number */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    animate={{
+                      y: [0, -4, 0],
+                    }}
+                    transition={{
+                      y: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.4,
+                      },
+                    }}
+                    className="relative text-4xl font-bold text-[#6ef3c5]"
+                  >
+                    {/* Pulse Glow */}
+                    <motion.div
+                      animate={{
+                        opacity: [0.15, 0.4, 0.15],
+                        scale: [1, 1.12, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.4,
+                      }}
+                      className="absolute inset-0 blur-xl"
+                    >
+                      <AnimatedCounter
+                        to={stat.to}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                        duration={2}
+                        className="text-[#6ef3c5]"
+                      />
+                    </motion.div>
+
+                    {/* Main Number */}
+                    <div className="relative z-10">
+                      <AnimatedCounter
+                        to={stat.to}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                        duration={2}
+                        className="text-[#6ef3c5]"
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Label */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 + i * 0.1 }}
+                    className="text-white/70 text-sm mt-2 uppercase tracking-wide"
+                  >
+                    {stat.label}
+                  </motion.p>
+                </motion.div>
+              </MotionWrapper>
+            ))}
+          </MotionStagger>
         </div>
       </section>
 

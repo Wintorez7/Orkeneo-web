@@ -5,6 +5,7 @@ import MotionStagger from "@/components/motion/MotionStagger";
 import MotionWrapper from "@/components/motion/MotionWrapper";
 import { fadeUp, scaleIn } from "@/lib/animations/variants";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 function getConsistencyLabel(value: number) {
   if (value < 33) return "Low";
@@ -12,7 +13,26 @@ function getConsistencyLabel(value: number) {
   return "High";
 }
 
+function getInsight(data: any, result: any) {
+  if (data.staffPct > 40) {
+    return `Your staffing is over-allocated at ${data.staffPct}%. Adjusting shifts could recover ~₹${Math.round((result.staff * 0.1) / 1000) * 1000}/month.`;
+  }
+  if (data.foodPct > 35) {
+    return `Your food cost at ${data.foodPct}% is above industry average. Better prep planning could save ~₹${Math.round((result.food * 0.15) / 1000) * 1000}/month.`;
+  }
+  return `Your operations look efficient. Fine-tuning demand planning could recover ~₹${Math.round((result.demand * 0.5) / 1000) * 1000}/month.`;
+}
+
 export default function Step3({ data, setData, result, next }: any) {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedProblem, setSelectedProblem] = useState<string>("");
+  const [selectedTool, setSelectedTool] = useState<string>("");
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  };
   return (
     <MotionStagger className="space-y-8">
       {/* TOP GRID */}
@@ -44,7 +64,14 @@ export default function Step3({ data, setData, result, next }: any) {
                 onChange={(e) =>
                   setData((d: any) => ({ ...d, foodPct: +e.target.value }))
                 }
-                className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                style={{
+                  background: `linear-gradient(to right, #4f46e5 ${
+                    ((data.foodPct - 10) / (60 - 10)) * 100
+                  }%, #e5e7eb ${
+                    ((data.foodPct - 10) / (60 - 10)) * 100
+                  }%)`,
+                }}
               />
 
               <div className="flex justify-between text-[11px] text-gray-400 mt-1">
@@ -77,7 +104,14 @@ export default function Step3({ data, setData, result, next }: any) {
                 onChange={(e) =>
                   setData((d: any) => ({ ...d, staffPct: +e.target.value }))
                 }
-                className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                style={{
+                  background: `linear-gradient(to right, #4f46e5 ${
+                    ((data.staffPct - 10) / (60 - 10)) * 100
+                  }%, #e5e7eb ${
+                    ((data.staffPct - 10) / (60 - 10)) * 100
+                  }%)`,
+                }}
               />
 
               <div className="flex justify-between text-[11px] text-gray-400 mt-1">
@@ -112,7 +146,12 @@ export default function Step3({ data, setData, result, next }: any) {
                 onChange={(e) =>
                   setData((d: any) => ({ ...d, consistency: +e.target.value }))
                 }
-                className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                style={{
+                  background: `linear-gradient(to right, #4f46e5 ${
+                    data.consistency
+                  }%, #e5e7eb ${data.consistency}%)`,
+                }}
               />
 
               <div className="flex justify-between text-[11px] text-gray-400 mt-1">
@@ -210,12 +249,12 @@ export default function Step3({ data, setData, result, next }: any) {
               {["Food waste", "Staffing", "Demand planning"].map((item, i) => (
                 <motion.button
                   key={item}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="px-3 py-1.5 rounded-full border border-gray-200 text-sm text-gray-600 hover:bg-indigo-50 transition-all"
+                  onClick={() => toggleTag(item)}
+                  className={`px-3 py-1.5 rounded-full border text-sm transition-all ${
+                    selectedTags.includes(item)
+                      ? "bg-indigo-600 text-white border-indigo-600"
+                      : "border-gray-200 text-gray-600 hover:bg-indigo-50"
+                  }`}
                 >
                   {item}
                 </motion.button>
@@ -224,7 +263,7 @@ export default function Step3({ data, setData, result, next }: any) {
 
             {/* RIGHT TAGS */}
             <div className="flex flex-wrap gap-5">
-              {["Zoho", "Petpooja", "GoFrugal", "Other"].map((item, i) => (
+              {["Zoho", "GoFrugal", "Other"].map((item, i) => (
                 <motion.button
                   key={item}
                   initial={{ opacity: 0, y: 10 }}
@@ -232,7 +271,12 @@ export default function Step3({ data, setData, result, next }: any) {
                   transition={{ delay: i * 0.05 + 0.1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-3 rounded-full border border-gray-200 text-sm text-gray-600 hover:bg-indigo-50 transition-all"
+                  onClick={() => setSelectedTool(item)}
+                  className={`px-3 py-1.5 rounded-full border text-sm transition-all ${
+                    selectedTool === item
+                      ? "bg-indigo-600 text-white border-indigo-600"
+                      : "border-gray-200 text-gray-600 hover:bg-indigo-50"
+                  }`}
                 >
                   {item}
                 </motion.button>
@@ -256,11 +300,7 @@ export default function Step3({ data, setData, result, next }: any) {
             />{" "}
             <p className="font-semibold">Insight:</p>{" "}
           </div>{" "}
-          <p className="text-sm text-[#005236]">
-            {" "}
-            Your staffing is slightly over-allocated during low demand hours.
-            Adjusting shifts could recover ~₹4,000/month.{" "}
-          </p>{" "}
+          <p className="text-sm text-[#005236]">{getInsight(data, result)}</p>
         </div>
       </MotionWrapper>
 

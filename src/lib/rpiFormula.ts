@@ -1,12 +1,12 @@
 export function calculateDetailedLoss(data: {
   revenue: number;
-  foodPct: number;   // total cost %
+  foodPct: number;  
   staffPct: number;
   consistency: number;
 }) {
  
-  const foodLossPct = data.foodPct * 0.1;   // ~10% wastage of food cost
-  const staffLossPct = data.staffPct * 0.15; // inefficiency
+  const foodLossPct = data.foodPct * 0.1;   
+  const staffLossPct = data.staffPct * 0.10; 
   
 
   const demandFactor =

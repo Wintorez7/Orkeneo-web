@@ -26,6 +26,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
 
 function cloudkitchen() {
   const killers = [
@@ -84,19 +85,25 @@ function cloudkitchen() {
 
   const stats = [
     {
-      value: "50%",
+      prefix: "",
+      to: 50,
+      suffix: "%",
       title: "Waste Reduction",
       desc: "Average savings on kitchen bi-products and spoilage.",
       color: "text-emerald-400",
     },
     {
-      value: "+18%",
+      prefix: "+",
+      to: 18,
+      suffix: "%",
       title: "Revenue Uplift",
       desc: "Through predictive stocking and peak management.",
       color: "text-blue-300",
     },
     {
-      value: "-20%",
+      prefix: "-",
+      to: 20,
+      suffix: "%",
       title: "Labor Cost",
       desc: "Dynamic staffing models optimized for actual demand.",
       color: "text-purple-300",
@@ -457,11 +464,13 @@ function cloudkitchen() {
           {stats.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
               {/* VALUE */}
-              <h2
+              <AnimatedCounter
+                to={item.to}
+                prefix={item.prefix}
+                suffix={item.suffix}
+                duration={2}
                 className={`text-5xl md:text-6xl font-extrabold ${item.color}`}
-              >
-                {item.value}
-              </h2>
+              />
 
               {/* TITLE */}
               <p className="mt-4 text-white text-lg font-semibold">

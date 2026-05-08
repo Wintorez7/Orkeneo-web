@@ -11,6 +11,7 @@ import MotionStagger from "@/components/motion/MotionStagger";
 import CTASection from "@/components/CTASection";
 import ComparisonSection from "@/components/ComparisonSection";
 import ReusableCarousel from "@/components/ReusableCarousel";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
 
 interface FeatureItem {
   title: string;
@@ -96,20 +97,26 @@ const withoutFeatures: FeatureItem[] = [
 
 const stats = [
   {
-    value: "+15%",
+    prefix: "+",
+    to: 15,
+    suffix: "%",
     label: "Increase in revenue",
   },
   {
-    value: "+20%",
+    prefix: "+",
+    to: 20,
+    suffix: "%",
     label: "Menu performance",
   },
   {
-    value: "Instant",
+    prefix: "",
+    to: 1,
+    suffix: "s",
     label: "Decision making",
   },
 ];
 
-const logos = ["Zoho POS", "GoFrugal", "Vyapar", "Petpooja"];
+const logos = ["Zoho POS", "GoFrugal", "Vyapar"];
 
 const steps = [
   {
@@ -601,19 +608,26 @@ export default function HeroSection() {
               <MotionWrapper key={index} variants={fadeUp}>
                 <motion.div whileHover={{ y: -6 }} className="group">
                   {/* Value */}
-                  <motion.h2
+                  <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.4 }}
-                    className="text-3xl md:text-5xl font-bold text-[#6EF3C5]"
                   >
-                    {stat.value}
-                  </motion.h2>
+                    <AnimatedCounter
+                      to={stat.to}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      duration={2}
+                      className="text-3xl md:text-5xl font-bold text-[#6EF3C5]"
+                    />
+                  </motion.div>
 
                   {/* Label */}
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
                     className="mt-3 text-xs md:text-sm tracking-widest uppercase text-gray-400 font-semibold group-hover:text-gray-300 transition"
                   >

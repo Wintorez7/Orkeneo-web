@@ -19,6 +19,7 @@ import { fadeUp, fadeLeft, fadeRight } from "@/lib/animations/variants";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
 import MotionStagger from "@/components/motion/MotionStagger";
 import MotionCard from "@/components/motion/MotionCard";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
 
 const testimonials = [
   {
@@ -38,6 +39,30 @@ const testimonials = [
     name: "Raghav Sharma",
     role: "QSR Owner, Bangalore",
     avatar: "/avatar/qsr-owner.png",
+  },
+];
+
+const profitStats = [
+  {
+    prefix: "₹",
+    to: 666,
+    suffix: "",
+    label: "SAVED DAILY ON WASTE",
+    color: "text-white",
+  },
+  {
+    prefix: "₹",
+    to: 1200,
+    suffix: "",
+    label: "EXTRA REVENUE/DAY",
+    color: "text-white",
+  },
+  {
+    prefix: "₹",
+    to: 15000,
+    suffix: "",
+    label: "TOTAL MONTHLY RECOVERY",
+    color: "text-[#4ADE80]",
   },
 ];
 
@@ -97,7 +122,7 @@ export default function CafesPage() {
                     Works With
                   </span>
                   <div className="flex gap-4 text-[#4B5563]">
-                    <span>Petpooja</span>
+                    {/* <span>Petpooja</span> */}
                     <span>Vyapar</span>
                     <span>Excel</span>
                   </div>
@@ -440,65 +465,33 @@ export default function CafesPage() {
 
           {/* CARDS */}
           <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1000px] mx-auto">
-            {/* Card 1 */}
-            <MotionCard index={0}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/10 backdrop-blur-[2px] rounded-3xl py-10 px-6 flex flex-col items-center justify-center text-center shadow-sm"
-              >
+            {profitStats.map((item, index) => (
+              <MotionCard key={index} index={index}>
                 <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-white font-extrabold text-[40px] md:text-[44px] leading-tight mb-2"
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/10 backdrop-blur-[2px] rounded-3xl py-10 px-6 flex flex-col items-center justify-center text-center shadow-sm border border-white/5"
                 >
-                  ₹666
-                </motion.div>
-                <div className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">
-                  SAVED DAILY ON WASTE
-                </div>
-              </motion.div>
-            </MotionCard>
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <AnimatedCounter
+                      to={item.to}
+                      prefix={item.prefix}
+                      suffix={item.suffix}
+                      duration={2}
+                      className={`${item.color} font-extrabold text-[40px] md:text-[44px] leading-tight mb-2`}
+                    />
+                  </motion.div>
 
-            {/* Card 2 */}
-            <MotionCard index={1}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/10 backdrop-blur-[2px] rounded-3xl py-10 px-6 flex flex-col items-center justify-center text-center shadow-sm"
-              >
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-white font-extrabold text-[40px] md:text-[44px] leading-tight mb-2"
-                >
-                  ₹1,200
+                  <div className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">
+                    {item.label}
+                  </div>
                 </motion.div>
-                <div className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">
-                  EXTRA REVENUE/DAY
-                </div>
-              </motion.div>
-            </MotionCard>
-
-            {/* Card 3 */}
-            <MotionCard index={2}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/10 backdrop-blur-[2px] rounded-3xl py-10 px-6 flex flex-col items-center justify-center text-center border border-white/5 shadow-sm"
-              >
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-[#4ADE80] font-extrabold text-[40px] md:text-[44px] leading-tight mb-2"
-                >
-                  ₹15,000
-                </motion.div>
-                <div className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">
-                  TOTAL MONTHLY RECOVERY
-                </div>
-              </motion.div>
-            </MotionCard>
+              </MotionCard>
+            ))}
           </MotionStagger>
         </div>
       </div>

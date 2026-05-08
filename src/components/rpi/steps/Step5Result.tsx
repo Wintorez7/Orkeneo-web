@@ -1,8 +1,15 @@
+"use client";
+
+import { useEffect } from "react";
 import ProfitRecoverySection from "@/components/ProfitRecoverySection";
 import LossCard from "../LossCard";
 import TrustSection from "@/components/TrustSection";
 
 export default function Step5Result({ data, result }: any) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-indigo-50 px-4 py-16 text-center">
       {/* HEADER */}
@@ -66,7 +73,7 @@ export default function Step5Result({ data, result }: any) {
           {Math.round((result.recoverMax * 12) / 100000).toFixed(1)}L/year extra
         </p>
       </div>
-      <ProfitRecoverySection />
+      <ProfitRecoverySection result={result} />
       <TrustSection />
     </div>
   );

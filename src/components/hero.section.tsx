@@ -6,7 +6,6 @@ import { Button } from "./reusable/button";
 import { BookDemoModal } from "./ui/book-demo-modal";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import { fadeUp, fadeRight } from "@/lib/animations/variants";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
 import MotionWrapper from "./motion/MotionWrapper";

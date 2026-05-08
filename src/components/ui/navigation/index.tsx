@@ -85,12 +85,12 @@ const solutionsDropdown: DropdownData = {
         "Identify high-margin items and optimize menu engineering for profit.",
       href: "/menu-intelligence",
     },
-    {
-      icon: "solar:archive-minimalistic-line-duotone",
-      label: "Inventory Optimization",
-      description:
-        "Real-time tracking and automated purchase orders for supplies.",
-    },
+    // {
+    //   icon: "solar:archive-minimalistic-line-duotone",
+    //   label: "Inventory Optimization",
+    //   description:
+    //     "Real-time tracking and automated purchase orders for supplies.",
+    // },
     {
       icon: "solar:users-group-two-rounded-line-duotone",
       label: "Smart Labor Scheduling",

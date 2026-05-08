@@ -6,7 +6,7 @@ export const easeOut: Transition = {
 };
 
 export const springSmooth: Transition = {
-  type: "spring" as const,
+  type: "spring",
   stiffness: 120,
   damping: 18,
 };

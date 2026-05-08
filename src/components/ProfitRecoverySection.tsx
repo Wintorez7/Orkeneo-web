@@ -1,7 +1,12 @@
 import { CheckCircle2, ArrowRight, TrendingUp } from "lucide-react";
 import React from "react";
 
-export default function ProfitRecoverySection() {
+export default function ProfitRecoverySection({ result }: any) {
+  const recoverMin = Math.round(result.recoverMin / 1000) * 1000;
+  const recoverMax = Math.round(result.recoverMax / 1000) * 1000;
+  const recoverAvg = Math.round((recoverMin + recoverMax) / 2);
+  const totalLoss = Math.round(result.total / 1000);
+  const remainingLoss = Math.round((result.total * 0.3) / 1000);
   return (
     <section className="py-16 md:py-24 px-4 w-full flex justify-center mt-12 bg-gray-50/50 rounded-[3rem]">
       <div className="max-w-6xl w-full flex flex-col gap-16">
@@ -24,12 +29,12 @@ export default function ProfitRecoverySection() {
                     BEFORE ORKENEO
                   </span>
                   <span className="text-[10px] font-bold text-[#D04A4A] block tracking-wide">
-                    (₹72.5K LOSS)
+                    (₹{totalLoss}K LOSS)
                   </span>
                 </div>
                 <div className="text-center">
                   <div className="text-[#D04A4A] text-xl font-bold">
-                    ₹72.5K Loss
+                    ₹{totalLoss}K Loss
                   </div>
                   <div className="text-[#D04A4A]/70 text-xs font-medium mt-1">
                     Without Orkeneo
@@ -42,12 +47,12 @@ export default function ProfitRecoverySection() {
                 {/* Overlapping Status Pill */}
                 <div className="absolute -top-9 ml-8 md:-left-8 z-10 whitespace-nowrap bg-[#0C6D48] text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 shadow-lg">
                   <TrendingUp className="w-3.5 h-3.5" />
-                  +₹62.5K PROFIT
+                  +₹{Math.round(recoverAvg / 1000)}K PROFIT
                 </div>
 
                 <div className="text-center mt-2">
                   <div className="text-[#1A734D] text-lg font-bold">
-                    ₹10K Loss
+                    ₹{remainingLoss}K Loss
                   </div>
                   <div className="text-[#21855F] text-xs font-medium mt-1">
                     Predictive Ops
@@ -120,7 +125,7 @@ export default function ProfitRecoverySection() {
         {/* Bottom CTAs */}
         <div className="flex flex-col items-center mt-6">
           <button className="bg-[#2E62F1] hover:bg-[#204AC4] text-white text-[1.1rem] font-bold py-4.5 px-8 rounded-2xl w-full max-w-[600px] transition-colors flex items-center justify-center gap-2 shadow-[0_8px_30px_rgb(46,98,241,0.25)]">
-            Start Recovering ₹72,500/month{" "}
+            Start Recovering ₹{recoverAvg.toLocaleString()}/month
             <ArrowRight className="w-5 h-5 ml-1" />
           </button>
 

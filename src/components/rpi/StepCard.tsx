@@ -2,11 +2,32 @@ import { fadeUp, scaleIn } from "@/lib/animations/variants";
 import MotionWrapper from "../motion/MotionWrapper";
 import MotionStagger from "../motion/MotionStagger";
 
-export default function StepCard({ children, config, step }: any) {
+export default function StepCard({ children, config, step, goBack }: any) {
   return (
     <MotionWrapper variants={fadeUp}>
-      <div className="max-w-4xl mt-20 mx-auto px-4 py-16 text-center">
-        {/* STEP */}
+      <div className="max-w-4xl mt-20 mx-auto px-4 py-16 text-center relative">
+        {/* BACK BUTTON — show only after step 1 */}
+        {step > 1 && (
+          <button
+            onClick={goBack}
+            className="absolute top-15 left-6 flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-indigo-600 bg-white hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 px-3 py-1.5 rounded-lg shadow-sm transition-all duration-200"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 12H5M12 19l-7-7 7-7"
+              />
+            </svg>
+            Back
+          </button>
+        )}
         <MotionStagger>
           <MotionWrapper variants={fadeUp}>
             <div className="inline-flex items-center gap-2 text-xs font-medium text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full mb-4">

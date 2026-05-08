@@ -53,7 +53,7 @@ export default function Step4({ next }: { next: () => void }) {
     if (currentStepIndex === steps.length) {
       const redirectTimer = setTimeout(() => {
         next();
-      }, 600); // Brief delay after completion
+      }, 4000); // 4-second delay after completion
       return () => clearTimeout(redirectTimer);
     }
   }, [currentStepIndex, next]);

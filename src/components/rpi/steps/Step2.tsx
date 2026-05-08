@@ -4,7 +4,14 @@ import MotionStagger from "@/components/motion/MotionStagger";
 import MotionWrapper from "@/components/motion/MotionWrapper";
 import { fadeUp, scaleIn } from "@/lib/animations/variants";
 
-export default function Step2({ data, setData, next }: any) {
+export default function Step2({ data, setData, next, result }: any) {
+  // Dynamic loss range using recoverMin/recoverMax from your formula
+  const lossMin = Math.round(result.recoverMin / 1000) * 1000;
+  const lossMax = Math.round(result.recoverMax / 1000) * 1000;
+
+  // Daily recoverable
+  const dailyMin = Math.round(lossMin / 30);
+  const dailyMax = Math.round(lossMax / 30);
   return (
     <MotionStagger>
       <div className="space-y-6">
@@ -14,8 +21,19 @@ export default function Step2({ data, setData, next }: any) {
               Monthly Revenue
             </p>
 
-            <div className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold">
-              ₹{data.revenue.toLocaleString()}
+            <div className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold flex items-center">
+              <span>₹</span>
+              <input
+                type="number"
+                max={5000000}
+                value={data.revenue || ""}
+                onChange={(e) => {
+                  let val = Number(e.target.value);
+                  if (val > 5000000) val = 5000000;
+                  setData((d: any) => ({ ...d, revenue: val }));
+                }}
+                className="bg-transparent border-none outline-none text-indigo-600 font-semibold w-20 text-left ml-0.5 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
             </div>
           </div>
         </MotionWrapper>
@@ -31,7 +49,14 @@ export default function Step2({ data, setData, next }: any) {
             onChange={(e) =>
               setData((d: any) => ({ ...d, revenue: +e.target.value }))
             }
-            className="w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-indigo-600"
+            className="w-full h-2 rounded-full appearance-none cursor-pointer accent-indigo-600"
+            style={{
+              background: `linear-gradient(to right, #4f46e5 ${
+                Math.min(Math.max(((data.revenue - 50000) / (5000000 - 50000)) * 100, 0), 100)
+              }%, #e5e7eb ${
+                Math.min(Math.max(((data.revenue - 50000) / (5000000 - 50000)) * 100, 0), 100)
+              }%)`,
+            }}
           />
 
           {/* LABELS */}
@@ -48,7 +73,7 @@ export default function Step2({ data, setData, next }: any) {
             <p className="text-sm text-gray-500 mb-2">You're losing</p>
 
             <p className="text-2xl md:text-3xl font-bold text-indigo-600">
-              ₹18,000–₹32,000/month
+              ₹{lossMin.toLocaleString()}–₹{lossMax.toLocaleString()}/month
             </p>
 
             <p className="text-xs text-gray-400 mt-2">
@@ -90,7 +115,8 @@ export default function Step2({ data, setData, next }: any) {
 
             {/* RECOVERY BAR */}
             <div className="mt-4 bg-white/70 border border-indigo-100 rounded-full px-4 py-2 text-center text-sm font-semibold text-indigo-600">
-              +₹4,500–₹6,500/day recoverable
+              +₹{dailyMin.toLocaleString()}–₹{dailyMax.toLocaleString()}/day
+              recoverable
             </div>
           </div>
         </MotionWrapper>

@@ -4,10 +4,35 @@ import CTASection from "@/components/CTASection";
 import StackLogos from "@/components/StackLogos";
 import { Ban, Clock, TrendingDown } from "lucide-react";
 import { Flame, UtensilsCrossed, Leaf } from "lucide-react";
-import { fadeUp, fadeIn, scaleIn } from "@/lib/animations/variants";
+import { fadeUp, scaleIn } from "@/lib/animations/variants";
 import MotionWrapper from "@/components/motion/MotionWrapper";
 import { motion } from "framer-motion";
 import MotionStagger from "@/components/motion/MotionStagger";
+import AnimatedCounter from "@/components/motion/AnimatedCounter";
+
+const stats = [
+  {
+    prefix: "",
+    to: 50,
+    suffix: "%",
+    label: "less food waste",
+    gradient: "from-[#34D399] to-[#6EE7B7]",
+  },
+  {
+    prefix: "₹",
+    to: 30,
+    suffix: ",000",
+    label: "saved per month",
+    gradient: "from-[#D1D5DB] to-[#E5E7EB]",
+  },
+  {
+    prefix: "",
+    to: 100,
+    suffix: "%",
+    label: "data-driven decisions",
+    gradient: "from-[#C4B5FD] to-[#DDD6FE]",
+  },
+];
 
 export default function FoodPrepForecastingPage() {
   return (
@@ -484,64 +509,33 @@ export default function FoodPrepForecastingPage() {
       <section className="bg-[#2f3640] py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            {/* Stat 1 */}
-            <MotionWrapper variants={fadeUp}>
-              <motion.div
-                whileHover={{ y: -6, scale: 1.03 }}
-                className="transition-all"
-              >
-                <motion.h3
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 120 }}
-                  className="text-4xl md:text-5xl font-bold bg-linear-to-r from-[#34D399] to-[#6EE7B7] bg-clip-text text-transparent"
+            {stats.map((stat, index) => (
+              <MotionWrapper key={index} variants={fadeUp}>
+                <motion.div
+                  whileHover={{ y: -6, scale: 1.03 }}
+                  className="transition-all"
                 >
-                  50%
-                </motion.h3>
+                  {/* Animated Number */}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 120 }}
+                  >
+                    <AnimatedCounter
+                      to={stat.to}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      duration={2}
+                      className={`text-4xl md:text-5xl font-bold bg-linear-to-r ${stat.gradient} bg-clip-text text-transparent`}
+                    />
+                  </motion.div>
 
-                <p className="mt-3 text-[#9CA3AF] text-sm">less food waste</p>
-              </motion.div>
-            </MotionWrapper>
-
-            {/* Stat 2 */}
-            <MotionWrapper variants={fadeUp}>
-              <motion.div
-                whileHover={{ y: -6, scale: 1.03 }}
-                className="transition-all"
-              >
-                <motion.h3
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 120 }}
-                  className="text-4xl md:text-5xl font-bold bg-linear-to-r from-[#D1D5DB] to-[#E5E7EB] bg-clip-text text-transparent"
-                >
-                  ₹30,000
-                </motion.h3>
-
-                <p className="mt-3 text-[#9CA3AF] text-sm">saved per month</p>
-              </motion.div>
-            </MotionWrapper>
-
-            {/* Stat 3 */}
-            <MotionWrapper variants={fadeUp}>
-              <motion.div
-                whileHover={{ y: -6, scale: 1.03 }}
-                className="transition-all"
-              >
-                <motion.h3
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 120 }}
-                  className="text-4xl md:text-5xl font-bold bg-linear-to-r from-[#C4B5FD] to-[#DDD6FE] bg-clip-text text-transparent"
-                >
-                  100%
-                </motion.h3>
-
-                <p className="mt-3 text-[#9CA3AF] text-sm">
-                  data-driven decisions
-                </p>
-              </motion.div>
-            </MotionWrapper>
+                  {/* Label */}
+                  <p className="mt-3 text-[#9CA3AF] text-sm">{stat.label}</p>
+                </motion.div>
+              </MotionWrapper>
+            ))}
           </MotionStagger>
         </div>
       </section>

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import MotionStagger from "@/components/motion/MotionStagger";
 
 export default function StackLogos() {
-  const logos = ["Zoho POS", "GoFrugal", "Vyapar", "Petpooja"];
+  const logos = ["Zoho POS", "GoFrugal", "Vyapar"];
 
   return (
     <section className="w-full py-16 relative overflow-hidden bg-linear-to-br bg-[#E6EBFF]">
