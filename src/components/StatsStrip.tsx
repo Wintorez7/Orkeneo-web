@@ -35,7 +35,7 @@ export default function StatsStrip() {
   ];
 
   return (
-    <section className="w-full py-20 bg-linear-to-b bg-[#f5f6ff]">
+    <section className="w-full py-20 bg-linear-to-b bg-[#2f3541]">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* STATS */}
         <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 items-center">

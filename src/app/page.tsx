@@ -36,17 +36,17 @@ export default function Home() {
       <AiManagerSection />
       <KitchenPlanSection />
       <IntelligenceCenter />
-      <StatsStrip />
+      <StatsStrip />  
       <CTASection
         title="See how much you're losing — and how to fix it"
-        subtitle="Join 200+ restaurants using Orkeneo to increase profits daily"
+        // subtitle="Join 200+ restaurants using Orkeneo to increase profits daily"
         primaryText="Get My AI Plan"
         secondaryText="See My Savings"
-        avatars={[
-          "/avatar/user-1.png",
-          "/avatar/user-2.png",
-          "/avatar/user-3.png",
-        ]}
+        // avatars={[
+        //   "/avatar/user-1.png",
+        //   "/avatar/user-2.png",
+        //   "/avatar/user-3.png",
+        // ]}
       />
       {/* <TestimonialCarousel testimonial={testimonialData} />
       <PowerUnlock />
