@@ -1,7 +1,14 @@
 "use client";
 
 import CTASection from "@/components/CTASection";
-import { Package, TrendingUp, Users } from "lucide-react";
+import {
+  Package,
+  TrendingUp,
+  Users,
+  CreditCard,
+  ScanSearch,
+  ClipboardList,
+} from "lucide-react";
 import Image from "next/image";
 import { PRECISION_CTA } from "@/lib/staffing.data";
 import ReusableCarousel from "@/components/ReusableCarousel";
@@ -54,6 +61,27 @@ const stats = [
     suffix: "%",
     label: "Operational Visibility",
     color: "text-[#D0BCFF]",
+  },
+];
+
+const steps = [
+  {
+    number: 1,
+    icon: CreditCard,
+    title: "Connect system",
+    description: "Seamlessly integrate with your existing POS and inventory.",
+  },
+  {
+    number: 2,
+    icon: ScanSearch,
+    title: "AI Analyzes",
+    description: "Our engine scans millions of data points to find leakages.",
+  },
+  {
+    number: 3,
+    icon: ClipboardList,
+    title: "Get daily commands",
+    description: "Actionable, precision instructions delivered before service.",
   },
 ];
 
@@ -212,10 +240,10 @@ export default function LossHeroSection() {
           {/* Cards */}
           <MotionStagger className="grid md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <MotionCard index={0}>
+            <MotionCard index={0} className="h-full">
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
+                className="h-full bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1 }}
@@ -246,10 +274,10 @@ export default function LossHeroSection() {
             </MotionCard>
 
             {/* Card 2 */}
-            <MotionCard index={1}>
+            <MotionCard index={1} className="h-full">
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
+                className="h-full bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1 }}
@@ -269,10 +297,10 @@ export default function LossHeroSection() {
             </MotionCard>
 
             {/* Card 3 */}
-            <MotionCard index={2}>
+            <MotionCard index={2} className="h-full">
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
+                className="h-full bg-white rounded-[32px] p-8 md:p-10 shadow-[0_4px_24px_rgb(0,0,0,0.02)] border border-gray-100 transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1 }}
@@ -337,7 +365,7 @@ export default function LossHeroSection() {
                       scale: 1.02,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="relative bg-[#F0F3FF] rounded-full px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
+                    className="relative bg-[#F0F3FF] rounded-lg px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
                   >
                     {/* Animated Left Bar */}
                     <motion.div
@@ -397,7 +425,7 @@ export default function LossHeroSection() {
                       scale: 1.02,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="relative bg-[#F0F3FF] rounded-full px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
+                    className="relative bg-[#F0F3FF] rounded-lg px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
                   >
                     <motion.div
                       initial={{ height: 0 }}
@@ -457,7 +485,7 @@ export default function LossHeroSection() {
                       scale: 1.02,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="relative bg-[#F0F3FF] rounded-full px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
+                    className="relative bg-[#F0F3FF] rounded-lg px-8 py-5 flex items-center justify-between overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.02)] border border-white"
                   >
                     <motion.div
                       initial={{ height: 0 }}
@@ -544,21 +572,36 @@ export default function LossHeroSection() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="relative w-full aspect-4/4.5 lg:aspect-[4/4.2] rounded-[48px] overflow-hidden "
+                className="relative z-10 w-full aspect-4/4.5 lg:aspect-[4/4.2] rounded-[48px] overflow-hidden shadow-2xl bg-black"
               >
                 <Image
-                  src="/images/kitchen.png"
+                  src="/images/fine-dining-kitchen.png"
                   alt="Kitchen precision"
                   fill
                   className="object-cover object-center"
+                  priority
                 />
 
-                {/* Overlay Ring */}
-                {/* <div className="absolute inset-0 rounded-[48px] ring-1 ring-inset ring-white/20 pointer-events-none" /> */}
+                {/* Glass Overlay Card */}
+                <div className="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 z-20 bg-white/50 backdrop-blur-lg border border-white/30 rounded-[32px] px-6 py-5 flex items-center justify-between shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                  <div>
+                    <p className="text-[10px] md:text-[11px] font-bold tracking-widest text-blue-600 uppercase mb-1 drop-shadow-sm">
+                      Live Status
+                    </p>
+                    <p className="text-lg md:text-xl font-bold text-white tracking-tight drop-shadow-md">
+                      Prep Efficiency
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xl md:text-2xl font-black text-[#4ADE80] tracking-tight drop-shadow-md">
+                      94.2%
+                    </p>
+                  </div>
+                </div>
               </motion.div>
 
               {/* Floating Status Card */}
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{
                   duration: 4,
@@ -574,7 +617,7 @@ export default function LossHeroSection() {
                 <p className="text-[15px] font-bold text-[#111827]">
                   AI active across kitchens
                 </p>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </MotionWrapper>
         </div>
@@ -881,209 +924,49 @@ export default function LossHeroSection() {
       />
 
       {/* How it Works Section */}
-      <section className="w-full bg-white py-24 px-6 border-t border-gray-100 overflow-hidden">
+      <section className="w-full bg-[#F0F3FF] py-24 px-6 border-t border-gray-100 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <MotionStagger className="grid md:grid-cols-3 gap-12 px-2">
-            {/* Step 1 */}
-            <MotionWrapper variants={fadeUp}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25 }}
-                className="flex flex-col items-center text-center"
-              >
-                {/* Animated Number Circle */}
-                <motion.div
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: 8,
-                  }}
-                  animate={{
-                    y: [0, -4, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="relative w-14 h-14 rounded-full bg-[#EEF2FF] flex items-center justify-center text-[#2563EB] font-bold text-xl mb-6"
-                >
-                  {/* Pulse Glow */}
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.4, 1],
-                      opacity: [0.2, 0, 0.2],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute inset-0 rounded-full bg-[#2563EB]/20"
-                  />
+          <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 px-2">
+            {steps.map((step, index) => (
+              <MotionWrapper key={step.number} variants={fadeUp}>
+                <div className="flex flex-col items-center text-center group">
+                  {/* Icon */}
+                  <div className="relative mb-6">
+                    {/* Number Badge (pop) */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{
+                        delay: 0.2 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      className="absolute -top-1 -right-1 z-10 w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md border-2 border-slate-50"
+                    >
+                      {step.number}
+                    </motion.div>
 
-                  <span className="relative z-10">1</span>
-                </motion.div>
+                    {/* Icon Circle */}
+                    <motion.div
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                      className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-300"
+                    >
+                      <step.icon size={36} />
+                    </motion.div>
+                  </div>
 
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-xl font-bold text-[#111827] mb-3"
-                >
-                  Connect system
-                </motion.h3>
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {step.title}
+                  </h3>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-[#6B7280] text-[15px] leading-relaxed max-w-[280px]"
-                >
-                  Seamlessly integrate with your existing POS and inventory.
-                </motion.p>
-              </motion.div>
-            </MotionWrapper>
-
-            {/* Step 2 */}
-            <MotionWrapper variants={fadeUp} delay={0.1}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25 }}
-                className="flex flex-col items-center text-center"
-              >
-                <motion.div
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: -8,
-                  }}
-                  animate={{
-                    y: [0, -4, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5,
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="relative w-14 h-14 rounded-full bg-[#EEF2FF] flex items-center justify-center text-[#2563EB] font-bold text-xl mb-6"
-                >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.4, 1],
-                      opacity: [0.2, 0, 0.2],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5,
-                    }}
-                    className="absolute inset-0 rounded-full bg-[#2563EB]/20"
-                  />
-
-                  <span className="relative z-10">2</span>
-                </motion.div>
-
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-xl font-bold text-[#111827] mb-3"
-                >
-                  AI Analyzes
-                </motion.h3>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-[#6B7280] text-[15px] leading-relaxed max-w-[280px]"
-                >
-                  Our engine scans millions of data points to find leakages.
-                </motion.p>
-              </motion.div>
-            </MotionWrapper>
-
-            {/* Step 3 */}
-            <MotionWrapper variants={fadeUp} delay={0.2}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25 }}
-                className="flex flex-col items-center text-center"
-              >
-                <motion.div
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: 8,
-                  }}
-                  animate={{
-                    y: [0, -4, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1,
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="relative w-14 h-14 rounded-full bg-[#EEF2FF] flex items-center justify-center text-[#2563EB] font-bold text-xl mb-6"
-                >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.4, 1],
-                      opacity: [0.2, 0, 0.2],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1,
-                    }}
-                    className="absolute inset-0 rounded-full bg-[#2563EB]/20"
-                  />
-
-                  <span className="relative z-10">3</span>
-                </motion.div>
-
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-xl font-bold text-[#111827] mb-3"
-                >
-                  Get daily commands
-                </motion.h3>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-[#6B7280] text-[15px] leading-relaxed max-w-[280px]"
-                >
-                  Actionable, precision instructions delivered before service.
-                </motion.p>
-              </motion.div>
-            </MotionWrapper>
+                  <p className="text-slate-500 text-[15px] leading-relaxed max-w-xs">
+                    {step.description}
+                  </p>
+                </div>
+              </MotionWrapper>
+            ))}
           </MotionStagger>
         </div>
       </section>

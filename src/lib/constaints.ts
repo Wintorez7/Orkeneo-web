@@ -60,7 +60,7 @@ export const navMenu = [
         icon: "solar:chef-hat-minimalistic-line-duotone",
         name: "Food Prep Forecasting",
         description: "AI-driven quantity suggestions to eliminate over-prep and stockouts.",
-        action: { text: "Learn more", href: "/food-prep-forecasting", icon: "mdi:arrow-right" },
+        action: { text: "Learn more", href: "/food-prep", icon: "mdi:arrow-right" },
       },
       {
         icon: "solar:book-2-line-duotone",
@@ -78,7 +78,7 @@ export const navMenu = [
         icon: "solar:users-group-two-rounded-line-duotone",
         name: "Smart Labor Scheduling",
         description: "Match staffing levels to predicted foot traffic and sales volume.",
-        action: { text: "Learn more", href: "/labor-scheduling", icon: "mdi:arrow-right" },
+        action: { text: "Learn more", href: "/staff", icon: "mdi:arrow-right" },
       },
     ],
   },

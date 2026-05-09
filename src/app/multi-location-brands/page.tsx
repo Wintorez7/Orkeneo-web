@@ -67,6 +67,33 @@ const testimonials = [
   },
 ];
 
+const networkSteps = [
+  {
+    number: 1,
+    icon: "ph:share-network-bold",
+    title: "Connect all outlets",
+    description:
+      "One-click integration with your existing POS and ERP systems across all locations.",
+    iconColor: "text-blue-600",
+  },
+  {
+    number: 2,
+    icon: "mdi:chart-box-outline",
+    title: "AI analyzes locations",
+    description:
+      "Orkeneo maps every transaction and prep action to find the network's efficiency ceiling.",
+    iconColor: "text-blue-600",
+  },
+  {
+    number: 3,
+    icon: "lucide:sparkles",
+    title: "Unified decisions",
+    description:
+      "Get smart alerts and ready-to-execute tasks that optimize the entire brand instantly.",
+    iconColor: "text-blue-600",
+  },
+];
+
 export default function MultiLocationBrandsPage() {
   const [activeFeature, setActiveFeature] = useState(0);
 
@@ -757,15 +784,8 @@ export default function MultiLocationBrandsPage() {
                   scale: 1.02,
                 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#F0F3FF] rounded-[3rem] p-8 pb-10 border border-[#F1F5F9] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-auto"
+                className="relative bg-[#F0F3FF] rounded-[1rem] p-8 pb-10 border border-[#F1F5F9] border-l-8 border-l-[#3B82F6] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-auto"
               >
-                <motion.div
-                  initial={{ height: 0 }}
-                  whileInView={{ height: "80%" }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute left-0.5 top-8 bottom-8 w-2 bg-[#3B82F6] rounded-l-4xl"
-                />
-
                 <div className="flex justify-between items-start mb-6 w-full">
                   <motion.div
                     whileHover={{ rotate: 8, scale: 1.1 }}
@@ -816,15 +836,8 @@ export default function MultiLocationBrandsPage() {
                   scale: 1.02,
                 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#F0F3FF] rounded-[2rem] p-8 pb-10 border border-[#F1F5F9] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-full"
+                className="relative bg-[#F0F3FF] rounded-[1rem] p-8 pb-10 border border-[#F1F5F9] border-l-8 border-l-[#8B5CF6] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-full"
               >
-                <motion.div
-                  initial={{ height: 0 }}
-                  whileInView={{ height: "80%" }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute left-0.5 top-8 bottom-8 w-2 bg-[#8B5CF6] rounded-l-4xl"
-                />
-
                 <div className="flex justify-between items-start mb-6 w-full">
                   <motion.div
                     whileHover={{ rotate: -8, scale: 1.1 }}
@@ -875,15 +888,8 @@ export default function MultiLocationBrandsPage() {
                   scale: 1.02,
                 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#F0F3FF] rounded-[2rem] p-8 pb-10 border border-[#F1F5F9] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-full"
+                className="relative bg-[#F0F3FF] rounded-[1rem] p-8 pb-10 border border-[#F1F5F9] border-l-8 border-l-[#10B981] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all flex flex-col h-full"
               >
-                <motion.div
-                  initial={{ height: 0 }}
-                  whileInView={{ height: "80%" }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute left-0.5 top-8 bottom-8 w-2 bg-[#10B981] rounded-l-4xl"
-                />
-
                 <div className="flex justify-between items-start mb-6 w-full">
                   <motion.div
                     whileHover={{ rotate: 8, scale: 1.1 }}
@@ -1174,16 +1180,16 @@ export default function MultiLocationBrandsPage() {
       </section>
 
       {/* ── TOTAL CONTROL ──────────────────────────────────────────────── */}
-      <section className="bg-[#F8F9FF] pt-24 pb-20 overflow-hidden relative">
+      <section className="bg-[#2f3541] pt-24 pb-20 overflow-hidden relative">
         {/* Background Glow */}
-        <motion.div
+        {/* <motion.div
           transition={{
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-linear-to-br from-indigo-200/30 via-blue-100/20 to-purple-200/20 blur-3xl rounded-full pointer-events-none"
-        />
+        /> */}
 
         <div className="max-w-300 mx-auto px-6 relative z-10">
           {/* Header */}
@@ -1193,7 +1199,7 @@ export default function MultiLocationBrandsPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-[2rem] md:text-[2.5rem] font-extrabold text-[#111827] tracking-tight leading-tight"
+                className="text-[2rem] md:text-[2.5rem] font-extrabold text-white tracking-tight leading-tight"
               >
                 One platform. Total control across your entire brand.
               </motion.h2>
@@ -1208,21 +1214,6 @@ export default function MultiLocationBrandsPage() {
                   transition={{ duration: 0.3 }}
                   className="relative backdrop-blur-sm rounded-[2rem] px-8 py-12 overflow-hidden"
                 >
-                  {/* Floating Glow */}
-                  <motion.div
-                    animate={{
-                      opacity: [0.2, 0.4, 0.2],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: index,
-                    }}
-                    className={`absolute -top-10 -right-10 w-32 h-32 ${item.glow} blur-3xl rounded-full`}
-                  />
-
                   {/* Animated Number */}
                   <motion.div
                     initial={{ opacity: 0, y: 25 }}
@@ -1245,7 +1236,7 @@ export default function MultiLocationBrandsPage() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
-                    className="text-[13px] font-bold tracking-[0.15em] text-slate-700 mb-4"
+                    className="text-[13px] mt-2 font-bold tracking-[0.15em] text-white mb-4"
                   >
                     {item.title}
                   </motion.p>
@@ -1267,260 +1258,63 @@ export default function MultiLocationBrandsPage() {
         </div>
       </section>
 
-      {/* ── THREE STEPS ────────────────────────────────────────────────── */}
       {/* ── THREE STEPS TO NETWORK DOMINANCE ───────────────────────────── */}
-      <section className="bg-white py-24 overflow-hidden relative">
-        {/* Background Glow */}
-        <motion.div
-          animate={{
-            opacity: [0.15, 0.3, 0.15],
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-linear-to-br from-indigo-100/30 via-purple-100/20 to-blue-100/20 blur-3xl rounded-full pointer-events-none"
-        />
-
-        <div className="max-w-300 mx-auto px-6 relative z-10">
+      <section className="w-full bg-[#F0F3FF] py-24 px-6 border-t border-gray-100 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <MotionWrapper variants={fadeUp}>
-            <div className="text-center mb-20">
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-[2rem] md:text-[2.5rem] font-extrabold text-[#111827] tracking-tight"
-              >
-                Three steps to network dominance
-              </motion.h2>
-            </div>
-          </MotionWrapper>
-
-          {/* Steps */}
-          <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center max-w-6xl mx-auto">
-            {/* Step 1 */}
+          <div className="text-center mb-16">
             <MotionWrapper variants={fadeUp}>
-              <motion.div
-                whileHover={{
-                  y: -10,
-                  scale: 1.03,
-                }}
-                transition={{ duration: 0.3 }}
-                className="relative bg-[#FCFCFF] rounded-[2rem] px-8 py-12 border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col items-center"
-              >
-                {/* Glow */}
-                <motion.div
-                  animate={{
-                    opacity: [0.2, 0.45, 0.2],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute -top-10 -right-10 w-32 h-32 bg-[#4F6EF7]/20 blur-3xl rounded-full"
-                />
-
-                {/* Icon */}
-                <motion.div
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: 8,
-                  }}
-                  animate={{
-                    y: [0, -6, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="w-20 h-20 rounded-full bg-[#EEF2FF] flex items-center justify-center mb-8 relative z-10"
-                >
-                  <Icon
-                    icon="ph:share-network-bold"
-                    className="text-[#4F6EF7]"
-                    width={32}
-                  />
-                </motion.div>
-
-                {/* Heading */}
-                <motion.h4
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-[1.25rem] font-bold text-slate-900 mb-4 tracking-tight"
-                >
-                  1. Connect all outlets
-                </motion.h4>
-
-                {/* Text */}
-                <motion.p
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-slate-500 text-[15px] leading-[1.6] max-w-[320px]"
-                >
-                  One-click integration with your existing POS and ERP systems
-                  across all locations.
-                </motion.p>
-              </motion.div>
+              <h2 className="text-[32px] md:text-[44px] font-black text-[#111827] mb-4 tracking-tight">
+                Three steps to network dominance
+              </h2>
             </MotionWrapper>
+          </div>
 
-            {/* Step 2 */}
-            <MotionWrapper variants={fadeUp} delay={0.1}>
-              <motion.div
-                whileHover={{
-                  y: -10,
-                  scale: 1.03,
-                }}
-                transition={{ duration: 0.3 }}
-                className="relative bg-[#FCFCFF] rounded-[2rem] px-8 py-12 border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col items-center"
-              >
-                <motion.div
-                  animate={{
-                    opacity: [0.2, 0.45, 0.2],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                  className="absolute -top-10 -right-10 w-32 h-32 bg-[#8B5CF6]/20 blur-3xl rounded-full"
-                />
+          <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 px-2">
+            {networkSteps.map((step, index) => (
+              <MotionWrapper key={step.number} variants={fadeUp}>
+                <div className="flex flex-col items-center text-center group">
+                  {/* Icon */}
+                  <div className="relative mb-6">
+                    {/* Number Badge (pop) */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{
+                        delay: 0.2 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      className="absolute -top-1 -right-1 z-10 w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md border-2 border-slate-50"
+                    >
+                      {step.number}
+                    </motion.div>
 
-                <motion.div
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: -8,
-                  }}
-                  animate={{
-                    y: [0, -6, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5,
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="w-20 h-20 rounded-full bg-[#F4EBFF] flex items-center justify-center mb-8 relative z-10"
-                >
-                  <Icon
-                    icon="mdi:chart-box-outline"
-                    className="text-[#8B5CF6]"
-                    width={32}
-                  />
-                </motion.div>
+                    {/* Icon Circle */}
+                    <motion.div
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                      className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300"
+                    >
+                      <Icon
+                        icon={step.icon}
+                        width={36}
+                        className={step.iconColor}
+                      />
+                    </motion.div>
+                  </div>
 
-                <motion.h4
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-[1.25rem] font-bold text-slate-900 mb-4 tracking-tight"
-                >
-                  2. AI analyzes locations
-                </motion.h4>
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {step.title}
+                  </h3>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-slate-500 text-[15px] leading-[1.6] max-w-[320px]"
-                >
-                  Orkeneo maps every transaction and prep action to find the
-                  network&apos;s efficiency ceiling.
-                </motion.p>
-              </motion.div>
-            </MotionWrapper>
-
-            {/* Step 3 */}
-            <MotionWrapper variants={fadeUp} delay={0.2}>
-              <motion.div
-                whileHover={{
-                  y: -10,
-                  scale: 1.03,
-                }}
-                transition={{ duration: 0.3 }}
-                className="relative bg-[#FCFCFF] rounded-[2rem] px-8 py-12 border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col items-center"
-              >
-                <motion.div
-                  animate={{
-                    opacity: [0.2, 0.45, 0.2],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 2,
-                  }}
-                  className="absolute -top-10 -right-10 w-32 h-32 bg-[#10B981]/20 blur-3xl rounded-full"
-                />
-
-                <motion.div
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: 8,
-                  }}
-                  animate={{
-                    y: [0, -6, 0],
-                  }}
-                  transition={{
-                    y: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1,
-                    },
-                    rotate: {
-                      duration: 0.3,
-                    },
-                  }}
-                  className="w-20 h-20 rounded-full bg-[#E8F5EF] flex items-center justify-center mb-8 relative z-10"
-                >
-                  <Icon
-                    icon="lucide:sparkles"
-                    className="text-[#057A55]"
-                    width={32}
-                  />
-                </motion.div>
-
-                <motion.h4
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-[1.25rem] font-bold text-slate-900 mb-4 tracking-tight"
-                >
-                  3. Unified decisions
-                </motion.h4>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-slate-500 text-[15px] leading-[1.6] max-w-[320px]"
-                >
-                  Get smart alerts and ready-to-execute tasks that optimize the
-                  entire brand instantly.
-                </motion.p>
-              </motion.div>
-            </MotionWrapper>
+                  <p className="text-slate-500 text-[15px] leading-relaxed max-w-xs">
+                    {step.description}
+                  </p>
+                </div>
+              </MotionWrapper>
+            ))}
           </MotionStagger>
         </div>
       </section>

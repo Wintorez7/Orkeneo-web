@@ -76,7 +76,7 @@ const solutionsDropdown: DropdownData = {
       label: "Food Prep Forecasting",
       description:
         "AI-driven quantity suggestions to eliminate over-prep and stockouts.",
-      href: "/food-prep-forecasting",
+      href: "/food-prep",
     },
     {
       icon: "solar:book-2-line-duotone",
@@ -96,7 +96,7 @@ const solutionsDropdown: DropdownData = {
       label: "Smart Labor Scheduling",
       description:
         "Match staffing levels to predicted foot traffic and sales volume.",
-      href: "/labor-scheduling",
+      href: "/staff",
     },
   ],
   rightPanel: {

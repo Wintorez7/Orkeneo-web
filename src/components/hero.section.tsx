@@ -113,7 +113,7 @@ export default function HeroSection() {
                 </Button>
 
                 {/* Avatar stack */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     {[
                       "/avatar/user-1.png",
@@ -141,7 +141,7 @@ export default function HeroSection() {
                   <span className="text-sm text-gray-500 font-medium">
                     +240 Owners Optimized
                   </span>
-                </div>
+                </div> */}
               </MotionWrapper>
             </div>
 

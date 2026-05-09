@@ -84,7 +84,7 @@ export default function ComparisonSection({
   };
 
   return (
-    <section className="w-full py-20 bg-gray-50 px-4 md:px-8">
+    <section className="w-full py-20  px-4 md:px-8">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 md:gap-8">
         {/* WITHOUT */}
         <MotionWrapper

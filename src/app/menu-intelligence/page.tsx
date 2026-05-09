@@ -12,6 +12,7 @@ import CTASection from "@/components/CTASection";
 import ComparisonSection from "@/components/ComparisonSection";
 import ReusableCarousel from "@/components/ReusableCarousel";
 import AnimatedCounter from "@/components/motion/AnimatedCounter";
+import PredictiveForecastCard from "@/components/PredictiveForecastCard";
 
 interface FeatureItem {
   title: string;
@@ -203,7 +204,7 @@ export default function HeroSection() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-gray-100 text-gray-800 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition"
+                  className="bg-gray-100 border border-gray-300 text-gray-800 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition"
                 >
                   See What Will Sell Today
                 </motion.button>
@@ -211,7 +212,7 @@ export default function HeroSection() {
             </MotionWrapper>
 
             {/* Users */}
-            <MotionWrapper variants={fadeUp}>
+            {/* <MotionWrapper variants={fadeUp}>
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex -space-x-2">
                   {["JD", "AK", "RS"].map((item, i) => (
@@ -227,7 +228,7 @@ export default function HeroSection() {
                   ))}
                 </div>
               </div>
-            </MotionWrapper>
+            </MotionWrapper> */}
           </MotionStagger>
 
           {/* RIGHT IMAGE */}
@@ -239,14 +240,7 @@ export default function HeroSection() {
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
-                  <Image
-                    src="/avatar/Background+Border+Shadow.png"
-                    alt="Predictive Forecast"
-                    width={400}
-                    height={700}
-                    className="w-full h-[60vh]"
-                    priority
-                  />
+                  <PredictiveForecastCard />
                 </motion.div>
               </div>
             </div>
@@ -567,7 +561,7 @@ export default function HeroSection() {
                       whileInView={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.3 }}
                       whileHover={{ scale: 1.1 }}
-                      className="w-16 h-16 flex items-center justify-center rounded-full bg-[#2F5BFF] text-white text-xl font-bold shadow-md z-10"
+                      className="w-16 h-16 mt-2 flex items-center justify-center rounded-full bg-[#2F5BFF] text-white text-xl font-bold shadow-md z-10"
                     >
                       {step.id}
                     </motion.div>

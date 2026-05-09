@@ -107,8 +107,8 @@ const ContactUs = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-full container gap-8 bg-white rounded-lg shadow-none flex justify-center flex-col md:flex-row overflow-hidden px-4 md:px-0">
+      <div className="min-h-screen flex items-center justify-center bg-transparent py-16">
+        <div className="w-full max-w-6xl mx-auto bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col md:flex-row overflow-hidden px-0">
           {/* Left: Image */}
           <div className="md:w-1/2 w-full md:max-w-[400px] h-[300px] md:h-auto relative">
             <Image
@@ -119,14 +119,14 @@ const ContactUs = () => {
             />
           </div>
           {/* Right: Form */}
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Contact us</h2>
-            <p className="text-gray-600 mb-6">Our friendly team would love to hear from you.</p>
+          <div className="md:w-1/2 w-full p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+            <h2 className="text-3xl font-black text-[#111827] mb-3 tracking-tight">Contact us</h2>
+            <p className="text-[#4B5563] text-lg mb-8">Our friendly team would love to hear from you.</p>
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name fields */}
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="w-full">
-                  <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="name">Full name</label>
+                  <label className="block text-sm font-semibold text-[#111827] mb-2" htmlFor="name">Full name</label>
                   <input 
                     id="name" 
                     name="name"
@@ -134,14 +134,14 @@ const ContactUs = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="John Doe" 
-                    className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    className="w-full border border-gray-200 bg-gray-50/50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all" 
                   />
                   {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">Email</label>
+                <label className="block text-sm font-semibold text-[#111827] mb-2" htmlFor="email">Email</label>
                 <input 
                   id="email" 
                   name="email"
@@ -149,16 +149,16 @@ const ContactUs = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="you@company.com" 
-                  className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  className="w-full border border-gray-200 bg-gray-50/50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all" 
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="phone">Phone number</label>
+                <label className="block text-sm font-semibold text-[#111827] mb-2" htmlFor="phone">Phone number</label>
                 <div className="flex">
                   <select 
-                    className="border border-gray-200 rounded-l-md px-2 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="border border-gray-200 border-r-0 bg-gray-50/50 rounded-l-xl px-3 py-3 text-sm text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all"
                   >
                     <option>IN</option>
                     <option>US</option>
@@ -170,7 +170,7 @@ const ContactUs = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+1 (555) 000-0000" 
-                    className="w-full border-t border-b border-r border-gray-200 rounded-r-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    className="w-full border border-gray-200 bg-gray-50/50 rounded-r-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all" 
                   />
                 </div>
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
@@ -191,7 +191,7 @@ const ContactUs = () => {
               </div> */}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="subject">Subject</label>
+                <label className="block text-sm font-semibold text-[#111827] mb-2" htmlFor="subject">Subject</label>
                 <input 
                   id="subject" 
                   name="subject"
@@ -199,43 +199,43 @@ const ContactUs = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   placeholder="What's this about?" 
-                  className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  className="w-full border border-gray-200 bg-gray-50/50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all" 
                 />
                 {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="message">Message</label>
+                <label className="block text-sm font-semibold text-[#111827] mb-2" htmlFor="message">Message</label>
                 <textarea 
                   id="message" 
                   name="message"
-                  rows={3} 
+                  rows={4} 
                   value={formData.message}
                   onChange={handleInputChange}
                   placeholder="Your message here..." 
-                  className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-200 bg-gray-50/50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5BFF] focus:border-transparent transition-all resize-none"
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center pt-2">
                 <input 
                   id="privacy" 
                   type="checkbox" 
                   checked={privacyChecked}
                   onChange={(e) => setPrivacyChecked(e.target.checked)}
-                  className="h-4 w-4 text-blue-600 border-gray-300 rounded" 
+                  className="h-4 w-4 text-[#2F5BFF] border-gray-300 rounded focus:ring-[#2F5BFF]" 
                 />
-                <label htmlFor="privacy" className="ml-2 text-sm text-gray-700">
-                  You agree to our friendly <button type="button" onClick={() => setIsModalOpen(true)} className="underline text-blue-600 hover:text-blue-800">privacy policy</button>.
+                <label htmlFor="privacy" className="ml-3 text-sm font-medium text-[#4B5563]">
+                  You agree to our friendly <button type="button" onClick={() => setIsModalOpen(true)} className="underline text-[#2F5BFF] hover:text-blue-800 transition-colors">privacy policy</button>.
                 </label>
               </div>
 
               <Button 
                 variant="default" 
                 type="submit"
-                size="md" 
-                className="w-full"
+                size="lg" 
+                className="w-full bg-[#2F5BFF] hover:bg-blue-700 shadow-lg hover:shadow-blue-500/25 transition-all text-[15px] py-6 mt-4"
                 disabled={isLoading}
               >
                 {isLoading ? (

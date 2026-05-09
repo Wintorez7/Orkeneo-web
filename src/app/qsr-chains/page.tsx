@@ -23,6 +23,7 @@ import Image from "next/image";
 import MotionCard from "@/components/motion/MotionCard";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
 import AnimatedCounter from "@/components/motion/AnimatedCounter";
+import CommandCenterCard from "@/components/CommandCenterCard";
 
 const transformationComparison = {
   withoutTitle: "Before Orkeneo",
@@ -590,7 +591,7 @@ export default function MultiLocationSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* 🔵 MAIN CARD */}
             <MotionWrapper variants={scaleIn}>
-              <div className="col-span-1 md:col-span-1 bg-blue-600 rounded-2xl p-6 relative overflow-hidden shadow-lg shadow-blue-900/50 flex flex-col justify-between min-h-55">
+              <div className="col-span-1 md:col-span-1 bg-blue-600 rounded-2xl p-6 relative overflow-hidden shadow-lg shadow-blue-900/50 flex flex-col justify-between min-h-51">
                 {/* Glow pulse */}
                 <motion.div
                   animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -703,14 +704,7 @@ export default function MultiLocationSection() {
                   animate={floatAnimation}
                   transition={floatTransition}
                 >
-                  <Image
-                    src="/avatar/Container.png"
-                    alt="Command Center Live View"
-                    width={1400}
-                    height={1400}
-                    className="w-full h-auto rounded-2xl"
-                    priority
-                  />
+                  <CommandCenterCard />
                 </motion.div>
               </div>
             </div>
@@ -861,7 +855,7 @@ export default function MultiLocationSection() {
         subtitle="Join the next generation of QSR giants using AI to protect every rupee of margin. Start your audit today."
         primaryText="Get My Profit Audit"
         bgColor="bg-gradient-to-r from-blue-600 to-blue-500"
-        helperText="No credit card required. Free 14-day performance audit."
+        helperText="No credit card required. Free 13-day performance audit."
       />
     </>
   );

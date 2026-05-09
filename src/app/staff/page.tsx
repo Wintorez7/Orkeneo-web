@@ -15,6 +15,7 @@ import {
   STAFFING_HERO,
 } from "@/lib/staffing.data";
 import AnimatedCounter from "@/components/motion/AnimatedCounter";
+import LaborPerformanceCard from "@/components/LaborPerformanceCard";
 
 interface CostCardProps {
   icon: React.ElementType;
@@ -129,7 +130,7 @@ export default function StaffingHero() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.96 }}
-                  className="bg-gray-100 px-6 py-3 rounded-full font-bold"
+                  className="bg-gray-100 border border-gray-300 text-gray-800 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition"
                 >
                   {STAFFING_HERO.secondaryText}
                 </motion.button>
@@ -137,7 +138,7 @@ export default function StaffingHero() {
             </MotionWrapper>
 
             {/* Users */}
-            <MotionWrapper variants={fadeUp}>
+            {/* <MotionWrapper variants={fadeUp}>
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex -space-x-2">
                   {STAFFING_HERO.users.map((u, i) => (
@@ -157,7 +158,7 @@ export default function StaffingHero() {
                   {STAFFING_HERO.usersText}
                 </p>
               </div>
-            </MotionWrapper>
+            </MotionWrapper> */}
           </MotionStagger>
 
           {/* RIGHT IMAGE */}
@@ -175,12 +176,7 @@ export default function StaffingHero() {
                 },
               }}
             >
-              <Image
-                src={STAFFING_HERO.image}
-                alt="graph"
-                width={700}
-                height={500}
-              />
+              <LaborPerformanceCard />
             </motion.div>
           </MotionWrapper>
         </div>

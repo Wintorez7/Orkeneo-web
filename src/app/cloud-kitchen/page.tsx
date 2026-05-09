@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import StackLogos from "@/components/StackLogos";
 import { fadeRight, fadeUp, scaleIn } from "@/lib/animations/variants";
 import { Scissors, Users, TrendingDown } from "lucide-react";
+import CloudKitchenForecastCard from "@/components/CloudKitchenForecastCard";
 
 import {
   Trash2,
@@ -355,14 +356,7 @@ function cloudkitchen() {
                 transition={floatTransition}
                 className="relative z-10 w-full max-w-3xl lg:max-w-4xl"
               >
-                <Image
-                  src="/avatar/Background+Border.png"
-                  width={1100}
-                  height={1100}
-                  alt="Dashboard Preview"
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                  priority
-                />
+                <CloudKitchenForecastCard />
               </motion.div>
 
               {/* Background blobs */}
@@ -404,9 +398,9 @@ function cloudkitchen() {
             <MotionStagger className="space-y-6">
               {planItems.map((item, index) => (
                 <MotionWrapper variants={fadeUp} key={index}>
-                  <div className="flex items-start md:items-center justify-between gap-4 pb-6 space-y-5 border-b border-slate-100 last:border-0 last:pb-0 transition-colors hover:bg-slate-50 group -mx-4 px-4 rounded-xl">
+                  <div className="flex items-start md:items-center justify-between gap-4 pb-6 space-y-5 border-b border-slate-100 last:border-0 last:pb-0 transition-colors hover:bg-slate-50 group px-4 rounded-xl">
                     {/* Left Side: Icon & Text */}
-                    <div className="flex items-center gap-4 flex-1">
+                    <div className="flex items-center gap-4 mt-4 flex-1">
                       <div
                         className={`p-3 rounded-full ${item.iconBg} shrink-0 transition-transform duration-300 group-hover:scale-110`}
                       >

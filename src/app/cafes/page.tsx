@@ -10,16 +10,26 @@ import {
   Coffee,
   CheckCircle,
   CheckCheck,
+  CreditCard,
+  BrainCircuit,
+  Rocket,
+  CheckCircle2,
 } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import ReusableCarousel from "@/components/ReusableCarousel";
 import { motion } from "framer-motion";
 import MotionWrapper from "@/components/motion/MotionWrapper";
-import { fadeUp, fadeLeft, fadeRight } from "@/lib/animations/variants";
+import {
+  fadeUp,
+  fadeLeft,
+  fadeRight,
+  scaleIn,
+} from "@/lib/animations/variants";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
 import MotionStagger from "@/components/motion/MotionStagger";
 import MotionCard from "@/components/motion/MotionCard";
 import AnimatedCounter from "@/components/motion/AnimatedCounter";
+import CafeDemandCard from "@/components/CafeDemandCard";
 
 const testimonials = [
   {
@@ -63,6 +73,36 @@ const profitStats = [
     suffix: "",
     label: "TOTAL MONTHLY RECOVERY",
     color: "text-[#4ADE80]",
+  },
+];
+
+const tags = [
+  "No setup cost",
+  "No POS change required",
+  "See results in 7 days",
+];
+
+const steps = [
+  {
+    number: 1,
+    icon: CreditCard,
+    title: "Connect your POS",
+    description:
+      "Instant one-click sync with Petpooja, Vyapar, or upload your Excel sheets.",
+  },
+  {
+    number: 2,
+    icon: BrainCircuit,
+    title: "AI analyzes daily data",
+    description:
+      "Our models process 100+ variables including weather, events, and historical trends.",
+  },
+  {
+    number: 3,
+    icon: Rocket,
+    title: "Get real-time suggestions",
+    description:
+      "Receive specific prep and staffing instructions via WhatsApp or App Dashboard.",
   },
 ];
 
@@ -114,20 +154,6 @@ export default function CafesPage() {
                   </Button>
                 </motion.div>
               </MotionWrapper>
-
-              {/* Integrations */}
-              <MotionWrapper variants={fadeUp} delay={0.4}>
-                <div className="flex items-center gap-6 text-sm font-bold border-t border-gray-200 pt-6 w-full max-w-sm">
-                  <span className="tracking-widest uppercase text-[11px] text-[#6B7280]">
-                    Works With
-                  </span>
-                  <div className="flex gap-4 text-[#4B5563]">
-                    {/* <span>Petpooja</span> */}
-                    <span>Vyapar</span>
-                    <span>Excel</span>
-                  </div>
-                </div>
-              </MotionWrapper>
             </div>
           </MotionWrapper>
 
@@ -144,13 +170,9 @@ export default function CafesPage() {
                 animate={floatAnimation}
                 transition={floatTransition}
               >
-                <Image
-                  src="/images/Demand-Index-Visualization.png"
-                  width={900}
-                  height={700}
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative z-10"
-                  alt=""
-                />
+                <div className="relative z-10">
+                  <CafeDemandCard />
+                </div>
               </motion.div>
             </div>
           </MotionWrapper>
@@ -497,10 +519,10 @@ export default function CafesPage() {
       </div>
 
       {/* section 5 */}
-      <div className="bg-[#F8FAFF] py-24 px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#F0F3FF] py-20 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <MotionWrapper variants={fadeUp}>
               <h2 className="text-[32px] md:text-[44px] font-black text-[#111827] mb-4 tracking-tight">
                 The Architect&apos;s Method
@@ -515,78 +537,50 @@ export default function CafesPage() {
           </div>
 
           {/* Steps */}
-          <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto relative px-4">
-            {/* Step 1 */}
-            <MotionCard index={0}>
-              <div className="flex flex-col items-center text-center relative z-10 group">
-                <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  className="w-[72px] h-[72px] bg-[#EEF5FF] rounded-[20px] flex items-center justify-center mb-8 mx-auto shadow-sm transition-all duration-300"
-                >
-                  <span className="text-[#2563EB] font-black text-[24px]">
-                    1
-                  </span>
-                </motion.div>
+          <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-16">
+            {steps.map((step, index) => (
+              <MotionWrapper key={step.number} variants={fadeUp}>
+                <div className="flex flex-col items-center text-center group">
+                  {/* Icon */}
+                  <div className="relative mb-6">
+                    {/* Number Badge (pop) */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{
+                        delay: 0.2 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      className="absolute -top-1 -right-1 z-10 w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md border-2 border-slate-50"
+                    >
+                      {step.number}
+                    </motion.div>
 
-                <h3 className="text-[22px] font-bold text-[#111827] mb-3">
-                  Connect your POS
-                </h3>
+                    {/* Icon Circle */}
+                    <motion.div
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                      className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform duration-300"
+                    >
+                      <step.icon size={36} />
+                    </motion.div>
+                  </div>
 
-                <p className="text-[#6B7280] leading-relaxed max-w-[280px]">
-                  Instant one-click sync with Petpooja, Vyapar, or upload your
-                  Excel sheets.
-                </p>
-              </div>
-            </MotionCard>
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {step.title}
+                  </h3>
 
-            {/* Step 2 */}
-            <MotionCard index={1}>
-              <div className="flex flex-col items-center text-center relative z-10 group">
-                <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  className="w-[72px] h-[72px] bg-[#EEF5FF] rounded-[20px] flex items-center justify-center mb-8 mx-auto shadow-sm transition-all duration-300"
-                >
-                  <span className="text-[#2563EB] font-black text-[24px]">
-                    2
-                  </span>
-                </motion.div>
-
-                <h3 className="text-[22px] font-bold text-[#111827] mb-3">
-                  AI analyzes daily data
-                </h3>
-
-                <p className="text-[#6B7280] leading-relaxed max-w-[280px]">
-                  Our models process 100+ variables including weather, events,
-                  and historical trends.
-                </p>
-              </div>
-            </MotionCard>
-
-            {/* Step 3 */}
-            <MotionCard index={2}>
-              <div className="flex flex-col items-center text-center relative z-10 group">
-                <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  className="w-[72px] h-[72px] bg-[#EEF5FF] rounded-[20px] flex items-center justify-center mb-8 mx-auto shadow-sm transition-all duration-300"
-                >
-                  <span className="text-[#2563EB] font-black text-[24px]">
-                    3
-                  </span>
-                </motion.div>
-
-                <h3 className="text-[22px] font-bold text-[#111827] mb-3">
-                  Get real-time suggestions
-                </h3>
-
-                <p className="text-[#6B7280] leading-relaxed max-w-[280px]">
-                  Receive specific prep and staffing instructions via WhatsApp
-                  or App Dashboard.
-                </p>
-              </div>
-            </MotionCard>
+                  <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
+                    {step.description}
+                  </p>
+                </div>
+              </MotionWrapper>
+            ))}
           </MotionStagger>
         </div>
-      </div>
+      </section>
 
       <ReusableCarousel
         data={testimonials}

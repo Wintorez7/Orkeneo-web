@@ -113,7 +113,7 @@ export default function FoodPrepForecastingPage() {
             </MotionWrapper>
 
             {/* SOCIAL PROOF */}
-            <MotionWrapper variants={scaleIn}>
+            {/* <MotionWrapper variants={scaleIn}>
               <div className="mt-8 flex items-center justify-center gap-3 text-sm text-[#6B7280]">
                 <div className="flex -space-x-2">
                   {[1, 2, 3].map((img, i) => (
@@ -131,7 +131,7 @@ export default function FoodPrepForecastingPage() {
 
                 <span>Used by 240+ restaurant owners</span>
               </div>
-            </MotionWrapper>
+            </MotionWrapper> */}
           </MotionStagger>
         </div>
       </section>
@@ -483,7 +483,7 @@ export default function FoodPrepForecastingPage() {
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ delay: i * 0.15 }}
-                        className={`relative z-10 w-16 h-16 rounded-full ${step.bg} flex items-center justify-center text-xl font-bold ${step.color}`}
+                        className={`relative z-10 w-16 h-16 mt-2 rounded-full ${step.bg} flex items-center justify-center text-xl font-bold ${step.color}`}
                       >
                         {step.num}
                       </motion.div>
