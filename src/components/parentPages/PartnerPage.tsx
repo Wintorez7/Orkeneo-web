@@ -1,7 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, BarChart3, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  ShieldCheck,
+  BadgeCheck,
+  AlertTriangle,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 // import { useRouter } from 'next/navigation';
 import FeatureCard from "@/components/reusable/FeatureCard";
 import { Banknote, RefreshCcw, Zap, LineChart } from "lucide-react";
@@ -207,55 +215,266 @@ export default function PartnerPage() {
           {/* RIGHT */}
           <MotionWrapper variants={fadeRight}>
             <div className="relative flex justify-center lg:justify-end">
-              {/* Floating badge */}
-              <motion.div
-                animate={floatAnimation}
-                transition={floatTransition}
-                className="absolute top-0 right-6 z-10"
-              >
-                <div className="flex items-center  gap-4 bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-gray-100 ">
-                  {/* Icon */}
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-100">
-                    <svg
-                      className="w-5 h-5 text-green-600"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-
-                  {/* Text */}
-                  <p className="text-lg font-semibold text-gray-800">
-                    +₹30,000 recovered
-                  </p>
-                </div>
-              </motion.div>
-
-              <div className="relative w-full max-w-[520px] lg:max-w-[620px]">
+              <div className="relative w-full max-w-127.5 lg:max-w-137.5 mx-auto">
                 <motion.div
                   animate={floatAnimation}
                   transition={floatTransition}
+                  className="relative"
                 >
-                  <Image
-                    src="/images/profit-recovery.png"
-                    alt="Profit Recovery Dashboard"
-                    width={600}
-                    height={500}
-                    className="rounded-2xl w-full h-auto object-cover"
-                    priority
-                  />
+                  {/* Floating Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    whileHover={{
+                      y: -4,
+                      scale: 1.03,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute -top-8 -right-2 sm:-right-8 z-20"
+                  >
+                    <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-3.5 rounded-[1.25rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100/50">
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.12, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#ECFDF5]"
+                      >
+                        <BadgeCheck className="w-5 h-5 text-white fill-[#059669]" />
+                      </motion.div>
+
+                      <p className="text-[15px] font-bold text-[#171C24]">
+                        +₹30,000 recovered
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Main Card */}
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-white rounded-[2.5rem] p-8 sm:p-10 shadow-2xl border border-gray-100"
+                  >
+                    {/* Header */}
+                    <div className="mb-8 mt-2">
+                      <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-[11px] font-bold text-gray-400 tracking-[0.25em] uppercase mb-5"
+                      >
+                        Orkeneo Intelligence
+                      </motion.p>
+
+                      <motion.h3
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 }}
+                        className="text-[14px] font-extrabold text-[#3B82F6] tracking-wider uppercase mb-1.5"
+                      >
+                        Live Profit Recovery
+                      </motion.h3>
+
+                      <motion.p
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.12 }}
+                        className="text-[15px] text-gray-500 font-medium"
+                      >
+                        Real-time insights across active kitchens
+                      </motion.p>
+                    </div>
+
+                    {/* Block 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.45 }}
+                      whileHover={{ x: 4 }}
+                      className="flex gap-5 mb-6"
+                    >
+                      <motion.div
+                        whileHover={{
+                          rotate: 6,
+                          scale: 1.05,
+                        }}
+                        transition={{ duration: 0.25 }}
+                        className="w-15 h-15 shrink-0 rounded-[1.25rem] bg-[#FAFAFA] flex items-center justify-center border border-gray-100"
+                      >
+                        <AlertTriangle
+                          className="w-6 h-6 text-white fill-[#D36060]"
+                          strokeWidth={1}
+                        />
+                      </motion.div>
+
+                      <div className="flex-1 border border-gray-100 rounded-[1.25rem] p-5 shadow-sm bg-white">
+                        <div className="flex justify-between items-center mb-3.5">
+                          <span className="font-bold text-[#4B5563] text-[15px]">
+                            Operational Leakage
+                          </span>
+
+                          <motion.span
+                            animate={{
+                              opacity: [1, 0.75, 1],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                            }}
+                            className="font-extrabold text-[#D36060] text-xl"
+                          >
+                            -₹14,200
+                          </motion.span>
+                        </div>
+
+                        <div className="h-2 w-full bg-[#F3F4F6] rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "70%" }}
+                            transition={{ duration: 1 }}
+                            className="h-full bg-[#D36060] rounded-full"
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Block 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.08 }}
+                      whileHover={{ x: 4 }}
+                      className="flex gap-5 mb-6"
+                    >
+                      <motion.div
+                        whileHover={{
+                          rotate: 8,
+                          scale: 1.05,
+                        }}
+                        transition={{ duration: 0.25 }}
+                        className="w-15 h-15 shrink-0 rounded-[1.25rem] bg-[#F8FAFF] flex items-center justify-center border border-blue-50"
+                      >
+                        <Sparkles
+                          className="w-6 h-6 text-white fill-[#81A8F8]"
+                          strokeWidth={1}
+                        />
+                      </motion.div>
+
+                      <div className="flex-1 border border-blue-100/60 rounded-[1.25rem] p-5 bg-[#F8FAFF]">
+                        <div className="mb-3.5">
+                          <span className="text-[11px] font-extrabold text-[#3B82F6] tracking-wider uppercase">
+                            AI Optimization Active
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <div className="h-2 flex-1 bg-[#E0E7FF] rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: "68%" }}
+                              transition={{ duration: 1 }}
+                              className="h-full bg-[#81A8F8] rounded-full"
+                            />
+                          </div>
+
+                          <motion.span
+                            animate={{
+                              opacity: [1, 0.75, 1],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                            }}
+                            className="text-[13px] font-bold text-[#3B82F6]"
+                          >
+                            68% Fixed
+                          </motion.span>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Block 3 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.12 }}
+                      whileHover={{ x: 4 }}
+                      className="flex gap-5"
+                    >
+                      <motion.div
+                        whileHover={{
+                          rotate: 8,
+                          scale: 1.05,
+                        }}
+                        transition={{ duration: 0.25 }}
+                        className="w-15 h-15 shrink-0 rounded-[1.25rem] bg-[#ECFDF5] flex items-center justify-center border border-emerald-50"
+                      >
+                        <CheckCircle2
+                          className="w-6 h-6 text-white fill-[#34D399]"
+                          strokeWidth={1}
+                        />
+                      </motion.div>
+
+                      <motion.div
+                        whileHover={{ scale: 1.01 }}
+                        className="flex-1 bg-[#111827] rounded-[1.25rem] p-6 shadow-xl relative overflow-hidden flex flex-col justify-center"
+                      >
+                        {/* Glow */}
+                        <motion.div
+                          animate={{
+                            opacity: [0.15, 0.3, 0.15],
+                            scale: [1, 1.08, 1],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                          }}
+                          className="absolute inset-0 bg-emerald-400/10 blur-2xl"
+                        />
+
+                        <span className="relative z-10 text-[10px] font-bold text-gray-400 tracking-[0.15em] uppercase mb-1">
+                          Profit Recovered
+                        </span>
+
+                        <motion.span
+                          animate={{
+                            y: [0, -2, 0],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                          className="relative z-10 text-[34px] leading-none font-extrabold text-white block mt-1"
+                        >
+                          +₹32,400
+                        </motion.span>
+
+                        <span className="absolute bottom-5 right-6 text-[10px] font-bold text-gray-500 tracking-widest uppercase">
+                          Weekly
+                        </span>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
                 </motion.div>
               </div>
 
               {/* Glow */}
-              <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-linear-to-tr from-blue-200 to-purple-200 rounded-full"></div>
+              <motion.div
+                animate={{
+                  opacity: [0.2, 0.35, 0.2],
+                  scale: [1, 1.08, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-linear-to-tr from-blue-200 to-purple-200 rounded-full"
+              />
             </div>
           </MotionWrapper>
         </div>
@@ -339,7 +558,7 @@ export default function PartnerPage() {
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
-                className="absolute top-6 right-6 bg-white rounded-2xl p-4 shadow-lg w-[220px]"
+                className="absolute top-6 right-6 bg-white rounded-2xl p-4 shadow-lg w-55"
               >
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
@@ -493,25 +712,90 @@ export default function PartnerPage() {
 
           {/* RIGHT */}
           <div className="relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[520px] lg:max-w-[600px]">
-              {/* Image float */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <Image
-                  src="/images/revenue-stream.png"
-                  alt="Revenue Stream Projection"
-                  width={600}
-                  height={500}
-                  className="rounded-3xl w-full h-auto object-contain"
-                  priority
-                />
-              </motion.div>
-            </div>
+            <div className="relative w-full max-w-130 lg:max-w-150">
+              <div className="bg-[#F0F3FF] shadow-xs border rounded-[2.5rem] p-8 sm:p-10 w-full">
+                <h3 className="text-2xl font-bold text-[#171C24] mb-10">
+                  Earning Projection
+                </h3>
 
-            {/* Glow */}
-            <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-linear-to-tr from-blue-200 to-purple-200 rounded-full"></div>
+                <div className="space-y-8">
+                  {/* Level 1 */}
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-[13px] font-bold text-[#4B5563] tracking-wider uppercase">
+                        LEVEL 1: 2 CLIENTS
+                      </span>
+                      <span className="text-xl font-bold text-[#171C24]">
+                        ₹10,000/mo
+                      </span>
+                    </div>
+                    <div className="h-4 w-full bg-white rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "15%" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                        className="h-full bg-[#194FD7] rounded-full"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Level 2 */}
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-[13px] font-bold text-[#4B5563] tracking-wider uppercase">
+                        LEVEL 2: 10 CLIENTS
+                      </span>
+                      <span className="text-xl font-bold text-[#171C24]">
+                        ₹50,000/mo
+                      </span>
+                    </div>
+                    <div className="h-4 w-full bg-white rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "50%" }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 1.2,
+                          delay: 0.2,
+                          ease: "easeOut",
+                        }}
+                        className="h-full bg-[#194FD7] rounded-full"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Level 3 */}
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-[13px] font-bold text-[#4B5563] tracking-wider uppercase">
+                        LEVEL 3: 20 CLIENTS
+                      </span>
+                      <span className="text-xl font-bold text-[#171C24]">
+                        ₹1,00,000/mo
+                      </span>
+                    </div>
+                    <div className="h-4 w-full bg-white rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 1.2,
+                          delay: 0.4,
+                          ease: "easeOut",
+                        }}
+                        className="h-full bg-[#194FD7] rounded-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-[14px] text-center text-[#6B7280] mt-12 font-medium">
+                  Projections based on Growth Partner 25% recurring share.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -556,7 +840,7 @@ export default function PartnerPage() {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                  className="relative z-10 w-16 h-16 rounded-full bg-[#DBEAFE] flex items-center justify-center text-xl font-bold text-[#1D4ED8]"
+                  className="relative mt-2 z-10 w-16 h-16 rounded-full bg-[#DBEAFE] flex items-center justify-center text-xl font-bold text-[#1D4ED8]"
                 >
                   1
                 </motion.div>
@@ -581,7 +865,7 @@ export default function PartnerPage() {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.35 }}
-                  className="relative z-10 w-16 h-16 rounded-full bg-[#EDE9FE] flex items-center justify-center text-xl font-bold text-[#7C3AED]"
+                  className="relative mt-1 z-10 w-16 h-16 rounded-full bg-[#EDE9FE] flex items-center justify-center text-xl font-bold text-[#7C3AED]"
                 >
                   2
                 </motion.div>
@@ -608,7 +892,7 @@ export default function PartnerPage() {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
-                  className="relative z-10 w-16 h-16 rounded-full bg-[#D1FAE5] flex items-center justify-center text-xl font-bold text-[#059669]"
+                  className="relative  mt-1 z-10 w-16 h-16 rounded-full bg-[#D1FAE5] flex items-center justify-center text-xl font-bold text-[#059669]"
                 >
                   3
                 </motion.div>
