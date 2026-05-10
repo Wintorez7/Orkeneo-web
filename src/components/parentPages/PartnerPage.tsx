@@ -183,7 +183,7 @@ export default function PartnerPage() {
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
-                  className="bg-linear-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center gap-2 shadow-md hover:opacity-90 transition"
+                  className="bg-[#155dfc] text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center gap-2 shadow-md hover:opacity-90 transition"
                 >
                   Start Earning with Orkeneo
                   <ArrowRight className="w-4 h-4" />
