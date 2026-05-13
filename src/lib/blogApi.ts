@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // HARDCODE for now — env var isn't loading
-const API_URL = "http://localhost:8200/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface Blog {
   id: string;
@@ -35,14 +35,27 @@ export interface BlogListResponse {
   path: string;
 }
 
-export const getPublishedBlogs = async (): Promise<BlogListResponse> => {
+export const getPublishedBlogs = async (): Promise<Blog[]> => {
   const url = `${API_URL}/blogs`;
   console.log("🚀 API CALL:", url);
 
-  const response = await axios.get<BlogListResponse>(url);
-  console.log("✅ RESPONSE:", response.data);
+  const response = await axios.get(url);
+  console.log("✅ FULL RESPONSE:", response.data);
 
-  return response.data;
+  //  HANDLE BOTH STRUCTURES (LOCAL + PROD)
+  const blogs =
+    response?.data?.data?.blogs || // local backend
+    response?.data?.data ||        // production backend
+    [];
+
+  console.log("📦 FINAL BLOGS:", blogs);
+
+  if (!Array.isArray(blogs)) {
+    console.error("❌ Blogs is NOT array:", blogs);
+    return [];
+  }
+
+  return blogs;
 };
 
 export const getBlogBySlug = async (slug: string): Promise<Blog | null> => {

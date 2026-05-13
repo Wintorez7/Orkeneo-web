@@ -157,8 +157,8 @@ export default async function Page({
   const article = transformBlog(apiBlog);
 
   // Add related blogs from API
-  if (allBlogsResponse?.success && allBlogsResponse.data?.blogs) {
-    article.related = transformRelatedBlogs(allBlogsResponse.data.blogs, slug);
+  if (allBlogsResponse && allBlogsResponse.length > 0) {
+    article.related = transformRelatedBlogs(allBlogsResponse, slug);
   }
 
   return <BlogContent article={article} />;

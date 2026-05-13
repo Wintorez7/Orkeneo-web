@@ -51,25 +51,24 @@ const BlogListClient = () => {
     const fetchBlogs = async () => {
       try {
         setIsLoading(true);
-        const response = await getPublishedBlogs();
+        const data = await getPublishedBlogs();
 
-        if (response.success && response.data?.blogs) {
-          const transformed: BlogViewModel[] = response.data.blogs.map(
-            (blog: Blog) => ({
-              id: blog.id,
-              slug: blog.slug,
-              title: blog.title,
-              category: blog.category,
-              description: blog.excerpt || blog.content.slice(0, 120) + "...",
-              image: blog.featured_image || "/images/placeholder-blog.png",
-              author: getAuthorName(blog.author_id),
-              authorImage: getAuthorAvatar(blog.author_id),
-              readTime: estimateReadTime(blog.content),
-              content: blog.content,
-              tags: blog.tags,
-              created_at: blog.created_at,
-            }),
-          );
+        if (data && data.length > 0) {
+          const transformed: BlogViewModel[] = data.map((blog: Blog) => ({
+            id: blog.id,
+            slug: blog.slug,
+            title: blog.title,
+            category: blog.category,
+            description: blog.excerpt || blog.content.slice(0, 120) + "...",
+            image: blog.featured_image || "/images/placeholder-blog.png",
+            author: getAuthorName(blog.author_id),
+            authorImage: getAuthorAvatar(blog.author_id),
+            readTime: estimateReadTime(blog.content),
+            content: blog.content,
+            tags: blog.tags,
+            created_at: blog.created_at,
+          }));
+
           setBlogs(transformed);
         }
       } catch (error) {
