@@ -286,7 +286,7 @@ function DropdownPanel({ data, label }: { data: DropdownData; label: string }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 z-50 "
+      className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 z-50"
       style={{ filter: "drop-shadow(0 16px 48px rgba(0,0,0,0.12))" }}
     >
       {/* Arrow */}
@@ -577,7 +577,7 @@ export function Navbar() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full bg-linear-to-b from-white/70 via-white/35 to-white/50 z-50 transition-all duration-300 ${
           scrolled ? "py-2" : "py-4"
         } ${isMobileMenuOpen ? "hidden" : ""}`}
       >
@@ -585,7 +585,7 @@ export function Navbar() {
           {/* ── pill wrapper ── */}
           <div
             ref={navRef}
-            className="relative flex  items-center justify-between bg-white rounded-full px-6 py-3 shadow-md"
+            className="relative flex  items-center justify-between bg-white/30 backdrop-blur-md rounded-full px-6 py-3 shadow-md"
           >
             {/* Logo */}
             <Link

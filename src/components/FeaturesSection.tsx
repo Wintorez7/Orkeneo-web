@@ -39,7 +39,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-20 bg-[#f9fafb]">
+    <section className="py-20  bg-[#f9fafb]">
       <div className="max-w-7xl mx-auto px-4 text-center">
         {/* Heading */}
         <MotionWrapper variants={fadeUp}>
@@ -76,7 +76,7 @@ export default function FeaturesSection() {
 
                 {/* Title */}
                 <h3
-                  className="mt-5 text-lg font-semibold text-gray-900 leading-snug min-h-[48px] 
+                  className="mt-5 text-lg font-semibold text-gray-900 leading-snug min-h-12 
                 group-hover:text-indigo-600 transition-colors duration-300"
                 >
                   {item.title}

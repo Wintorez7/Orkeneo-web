@@ -10,7 +10,7 @@ export default function AiManagerSection() {
         {/* LEFT SIDE - FLOATING CARDS */}
         <div className="relative w-full h-105 md:flex md:justify-center md:items-center">
           {/* CARD 1 */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-[85%] sm:w-[75%] md:w-[420px] z-0 hover:z-40">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-[85%] sm:w-[75%] md:w-105 z-0 hover:z-40">
             <motion.div
               className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] p-6 border border-gray-100 border-l-[6px] border-l-blue-500 cursor-pointer w-full relative"
             >
@@ -33,7 +33,7 @@ export default function AiManagerSection() {
           </div>
 
           {/* CARD 2 (CENTER MAIN) */}
-          <div className="absolute mt-2 top-40 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 w-[90%] sm:w-[80%] md:w-[460px] z-10 hover:z-40">
+          <div className="absolute mt-2 top-40 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 w-[90%] sm:w-[80%] md:w-115 z-10 hover:z-40">
             <motion.div
               initial={{ opacity: 0, y: 50, rotate: 6 }}
               whileInView={{ opacity: 1, y: 0, rotate: 2 }}
@@ -49,7 +49,7 @@ export default function AiManagerSection() {
             >
 
               {/* AI BADGE */}
-              <div className="absolute -rotate-2 -right-2 md:-right-10 top-1/2 md:top-1/2  md:-translate-y-1/2 translate-y-0 bottom-full -mb-4 md:bottom-auto md:mb-0 bg-linear-to-r from-purple-500 to-indigo-500 text-white text-xs px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg flex items-center gap-2 max-w-[200px] md:max-w-none hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-shadow duration-300">
+              <div className="absolute -rotate-2 -right-2 md:-right-10 top-1/2 md:top-1/2  md:-translate-y-1/2 translate-y-0 bottom-full -mb-4 md:bottom-auto md:mb-0 bg-linear-to-r from-purple-500 to-indigo-500 text-white text-xs px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg flex items-center gap-2 max-w-50 md:max-w-none hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-shadow duration-300">
                 <span className="w-2 h-2 shrink-0 bg-white rounded-full animate-pulse" />
                 <span className="truncate md:overflow-visible">
                   AI Pulse: Listening to data...
@@ -74,7 +74,7 @@ export default function AiManagerSection() {
           </div>
 
           {/* CARD 3 */}
-          <div className="absolute -bottom-15 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-[85%] sm:w-[75%] md:w-[420px] z-0 hover:z-40">
+          <div className="absolute -bottom-15 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-[85%] sm:w-[75%] md:w-105 z-0 hover:z-40">
             <motion.div
               initial={{ opacity: 0, y: 50, rotate: -6 }}
               whileInView={{ opacity: 1, y: 0, rotate: -2 }}

@@ -22,15 +22,17 @@ import KitchenPlanSection from "@/components/KitchenPlanSection";
 import IntelligenceCenter from "@/components/IntelligenceCenter";
 import StatsStrip from "@/components/StatsStrip";
 import CTASection from "@/components/CTASection";
+import ScrollTabs from "@/components/motion/ScrollTabs.tsx";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-linear-to-br overflow-x-hidden from-[#f8f9ff] via-[#f3f5ff] to-[#eef1ff]">
+    <main className="min-h-screen bg-linear-to-br overflow-x-hidden ">
       <HeroSection />
       {/* <DashboardShowcase /> */}
       {/* <Brands /> */}
       <StackLogos />
       {/* <Features /> */}
+      <ScrollTabs />
       <FeaturesSection />
       <AiKitchenSection />
       <AiManagerSection />

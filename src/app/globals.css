@@ -266,3 +266,18 @@
 .btn-primary {
   @apply bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}

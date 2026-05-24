@@ -1,14 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "./reusable/button";
 import { BookDemoModal } from "./ui/book-demo-modal";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp, fadeRight } from "@/lib/animations/variants";
 import { floatAnimation, floatTransition } from "@/lib/animations/transitions";
 import MotionWrapper from "./motion/MotionWrapper";
+import { ContainerScroll } from "@/components/ui/container-scroll";
 
 // ── helpers ──────────────────────────────────────────────────────────────
 function formatINR(value: number): string {
@@ -32,7 +31,6 @@ function calcRecovered(loss: number) {
 
 // ── Component ─────────────────────────────────────────────────────────────
 export default function HeroSection() {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculator state
@@ -54,8 +52,19 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="pt-10 mt-20 pb-4 md:pt-16 md:pb-8">
-        <div className="container mx-auto px-4 max-w-7xl">
+      <section className="relative pt-10 mt-20 pb-4 md:pt-16 md:pb-8 overflow-hidden">
+        {/* 🎥 Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+        >
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
+
+        <div className="relative z-10 container mx-auto px-4 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             {/* ── LEFT ─────────────────────────────────────────── */}
             <div className="flex-1 text-left">
@@ -106,42 +115,42 @@ export default function HeroSection() {
                   size="md"
                   onClick={() => setIsModalOpen(true)}
                   className="px-6 py-3 rounded-full text-sm font-semibold bg-blue-600 text-white 
-                shadow-lg shadow-blue-200 transition-all duration-300
-                hover:bg-blue-700 hover:scale-[1.03] active:scale-[0.97]"
+            shadow-lg shadow-blue-200 transition-all duration-300
+            hover:bg-blue-700 hover:scale-[1.03] active:scale-[0.97]"
                 >
                   Get My AI Plan →
                 </Button>
 
                 {/* Avatar stack */}
                 {/* <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[
-                      "/avatar/user-1.png",
-                      "/avatar/user-2.png",
-                      "/avatar/user-3.png",
-                    ].map((src, i) => (
-                      <div
-                        key={i}
-                        className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden relative"
-                      >
-                        <Image
-                          src={src}
-                          alt={`Owner ${i + 1}`}
-                          fill
-                          className="object-cover"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display =
-                              "none";
-                          }}
-                        />
-                      </div>
-                    ))}
-                  </div>
+            <div className="flex -space-x-2">
+              {[
+                "/avatar/user-1.png",
+                "/avatar/user-2.png",
+                "/avatar/user-3.png",
+              ].map((src, i) => (
+                <div
+                  key={i}
+                  className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden relative"
+                >
+                  <Image
+                    src={src}
+                    alt={`Owner ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display =
+                        "none";
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
 
-                  <span className="text-sm text-gray-500 font-medium">
-                    +240 Owners Optimized
-                  </span>
-                </div> */}
+            <span className="text-sm text-gray-500 font-medium">
+              +240 Owners Optimized
+            </span>
+          </div> */}
               </MotionWrapper>
             </div>
 
@@ -153,9 +162,9 @@ export default function HeroSection() {
                   transition={floatTransition}
                   whileHover={{ y: -6 }}
                   className="bg-white rounded-2xl border border-gray-100 p-6 relative
-                  shadow-[0_20px_60px_rgba(99,102,241,0.15),0_8px_30px_rgba(139,92,246,0.12)]
-                  hover:shadow-[0_30px_80px_rgba(99,102,241,0.25)]
-                  transition-all duration-500"
+            shadow-[0_20px_60px_rgba(99,102,241,0.15),0_8px_30px_rgba(139,92,246,0.12)]
+            hover:shadow-[0_30px_80px_rgba(99,102,241,0.25)]
+            transition-all duration-500"
                 >
                   {/* Card header */}
                   <div className="flex items-center gap-2 mb-6">
@@ -259,8 +268,8 @@ export default function HeroSection() {
                   <button
                     onClick={() => setIsModalOpen(true)}
                     className="w-full py-3 rounded-full bg-blue-600 text-white text-sm font-semibold 
-        transition-all duration-300 shadow-md shadow-blue-200
-        hover:bg-blue-700 hover:scale-[1.02] active:scale-[0.97]"
+              transition-all duration-300 shadow-md shadow-blue-200
+              hover:bg-blue-700 hover:scale-[1.02] active:scale-[0.97]"
                   >
                     Get My AI Plan →
                   </button>
@@ -274,6 +283,47 @@ export default function HeroSection() {
             </MotionWrapper>
           </div>
         </div>
+      </section>
+
+      {/* Hero Image / Video Container */}
+      <section className="relative py-24 overflow-hidden">
+        {/*  BACKGROUND IMAGE */}
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            backgroundImage: "url('/images/hero-background.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+
+        {/*  CONTENT */}
+        <MotionWrapper variants={fadeRight} delay={0.3}>
+          <ContainerScroll
+            titleComponent={
+              <div className="text-center">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white">
+                  Everything your team relies on, working together
+                </h2>
+
+                <p className="mt-4 text-lg text-white max-w-2xl mx-auto">
+                  Orkeneo acts as the hub for workflows behind your team,
+                  keeping key tasks connected in one place.
+                </p>
+              </div>
+            }
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover rounded-xl shadow-2xl"
+            >
+              <source src="/video/kitchen.mp4" type="video/mp4" />
+            </video>
+          </ContainerScroll>
+        </MotionWrapper>
       </section>
 
       <BookDemoModal
